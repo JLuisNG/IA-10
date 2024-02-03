@@ -16,7 +16,7 @@ export class App extends Component {
     filter: '',
   };
 
-  handleSubmitContact = e => {
+  handleSubmitContact = (e) => {
     e.preventDefault();
     const nameContact = e.target.name.value;
     const numberContact = e.target.numberPhone.value;
@@ -30,10 +30,11 @@ export class App extends Component {
 
     if (
       !contacts.some(
-        contact => contact.name.toLowerCase() === nameContact.toLowerCase()
+        (contact) =>
+          contact.name.toLowerCase() === nameContact.toLowerCase()
       )
     ) {
-      this.setState(prevState => ({
+      this.setState((prevState) => ({
         contacts: [...prevState.contacts, newContact],
       }));
     } else {
@@ -41,15 +42,15 @@ export class App extends Component {
     }
   };
 
-  handleSearch = e => {
+  handleSearch = (e) => {
     this.setState({
       filter: e.target.value,
-    }); 
+    });
   };
 
-  handleDeleteContact = contactId => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+  handleDeleteContact = (contactId) => {
+    this.setState((prevState) => ({
+      contacts: prevState.contacts.filter((contact) => contact.id !== contactId),
     }));
   };
 
@@ -60,15 +61,15 @@ export class App extends Component {
         <Container>
           <NewContactContainer>
             <h2>Phonebook</h2>
-            <NewContact createContact={this.handleSubmitContact}></NewContact>
+            <NewContact createContact={this.handleSubmitContact} />
           </NewContactContainer>
           <h2>Contacts</h2>
-          <ContactFilter validator={this.handleSearch}></ContactFilter>
+          <ContactFilter validator={this.handleSearch} />
           <ContactsList
             contacts={contacts}
             search={filter}
             delContact={this.handleDeleteContact}
-          ></ContactsList>
+          />
         </Container>
       </main>
     );

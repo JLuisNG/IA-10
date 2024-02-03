@@ -6,7 +6,7 @@ const NewContact = ({ createContact }) => {
   return (
     <Form onSubmit={createContact}>
       <label htmlFor="name">
-        Name
+        Name:
         <input
           id="name"
           type="text"
@@ -17,10 +17,12 @@ const NewContact = ({ createContact }) => {
         />
       </label>
       <label htmlFor="numberPhone">
-        Number
+        Number:
         <input id="numberPhone" type="tel" name="numberPhone" required />
       </label>
-      <button type="submit">Add Contact</button>
+      <button type="submit">
+        <span>Add Contact</span>
+      </button>
     </Form>
   );
 };

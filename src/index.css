@@ -12,6 +12,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: url(./img/olas-en-la-orilla-del-mar_5120x2880_xtrafondos.com.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 code {
@@ -26,7 +29,37 @@ ul{
 input{
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid #c72f2f;
+  border-bottom: 1px solid #da2121;
   outline: none;
   margin-left: 10px;
+}
+
+button {
+
+  position: relative;
+  left: 100px;
+
+  background-color: #f556c0;
+  color: white;  
+  padding: 12px 24px;
+
+  box-shadow: 0 0 10px #8c7dfd;  
+  text-shadow: 0px 0px 4px rgba(255,255,255,0.7);
+
+  border: none;
+  border-radius: 20px;
+
+  transition: background-color 4s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #a5f9fc;
+    filter: blur(2px);
+  }
+}
+
+button span {
+  position: relative;
+  z-index: 1;  
+  color: #0000009a;
 }

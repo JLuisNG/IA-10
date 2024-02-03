@@ -12,7 +12,9 @@ export const ContactsList = ({ contacts, search, delContact }) => {
           .map(filtered => (
             <Contact key={filtered.id}>
               {filtered.name} {filtered.number}
-              <button onClick={() => delContact(filtered.id)}>Delete</button>
+              <button onClick={() => delContact(filtered.id)}>
+                <span>Delete</span>
+                </button>
             </Contact>
           ))}
       </ContactsWrapper>
