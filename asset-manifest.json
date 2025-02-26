@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/goit-react-hw-02-phonebook/static/css/main.ab1b9433.css",
-    "main.js": "/goit-react-hw-02-phonebook/static/js/main.f97b4162.js",
-    "static/media/olas-en-la-orilla-del-mar_5120x2880_xtrafondos.com.jpg": "/goit-react-hw-02-phonebook/static/media/olas-en-la-orilla-del-mar_5120x2880_xtrafondos.com.b4304520b606e6eecf16.jpg",
-    "index.html": "/goit-react-hw-02-phonebook/index.html",
-    "main.ab1b9433.css.map": "/goit-react-hw-02-phonebook/static/css/main.ab1b9433.css.map",
-    "main.f97b4162.js.map": "/goit-react-hw-02-phonebook/static/js/main.f97b4162.js.map"
+    "main.css": "/IA-1/static/css/main.fcdf9c73.css",
+    "main.js": "/IA-1/static/js/main.e3b1a255.js",
+    "static/media/olas-en-la-orilla-del-mar_5120x2880_xtrafondos.com.jpg": "/IA-1/static/media/olas-en-la-orilla-del-mar_5120x2880_xtrafondos.com.b4304520b606e6eecf16.jpg",
+    "index.html": "/IA-1/index.html",
+    "main.fcdf9c73.css.map": "/IA-1/static/css/main.fcdf9c73.css.map",
+    "main.e3b1a255.js.map": "/IA-1/static/js/main.e3b1a255.js.map"
   },
   "entrypoints": [
-    "static/css/main.ab1b9433.css",
-    "static/js/main.f97b4162.js"
+    "static/css/main.fcdf9c73.css",
+    "static/js/main.e3b1a255.js"
   ]
 }
