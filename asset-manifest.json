@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/IA-1/static/css/main.fcdf9c73.css",
-    "main.js": "/IA-1/static/js/main.e3b1a255.js",
-    "static/media/olas-en-la-orilla-del-mar_5120x2880_xtrafondos.com.jpg": "/IA-1/static/media/olas-en-la-orilla-del-mar_5120x2880_xtrafondos.com.b4304520b606e6eecf16.jpg",
-    "index.html": "/IA-1/index.html",
-    "main.fcdf9c73.css.map": "/IA-1/static/css/main.fcdf9c73.css.map",
-    "main.e3b1a255.js.map": "/IA-1/static/js/main.e3b1a255.js.map"
+    "main.css": "/IA-10/static/css/main.cd96479f.css",
+    "main.js": "/IA-10/static/js/main.feb52ca6.js",
+    "static/media/olas-en-la-orilla-del-mar_5120x2880_xtrafondos.com.jpg": "/IA-10/static/media/olas-en-la-orilla-del-mar_5120x2880_xtrafondos.com.b4304520b606e6eecf16.jpg",
+    "index.html": "/IA-10/index.html",
+    "main.cd96479f.css.map": "/IA-10/static/css/main.cd96479f.css.map",
+    "main.feb52ca6.js.map": "/IA-10/static/js/main.feb52ca6.js.map"
   },
   "entrypoints": [
-    "static/css/main.fcdf9c73.css",
-    "static/js/main.e3b1a255.js"
+    "static/css/main.cd96479f.css",
+    "static/js/main.feb52ca6.js"
   ]
 }
