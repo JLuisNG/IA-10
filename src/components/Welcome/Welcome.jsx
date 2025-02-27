@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import '../../styles/Welcome.scss';
 import logoImg from '../../images/32A90059-EE8B-4689-A398-D08AC03A1AC6.jpeg';
 
+
 const Welcome = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -123,18 +124,50 @@ const Welcome = () => {
           <img src={logoImg} alt="Logo" className="header__logo-img" />
         </div>
         <nav className="header__nav">
-        <ul class="header__menu">
-                <li class="header__item"><a href="/Ubicacion.HTml" class="header__link">SERVICIOS</a></li>
-                <li class="header__item"><a href="/TS.html" class="header__link">THERAPY SYNC</a></li>
-                <li class="header__item"><a href="/Agencias.html" class="header__link">Agencias</a></li>
-                <li class="header__item"><a href="/Support.html" class="header__link">SOPORTE</a></li>
-            </ul>
+          <ul className="header__menu">
+            <li className="header__item">
+              <span 
+                className="header__link" 
+                onClick={() => navigate('/ubicacion')}
+                style={{ cursor: 'pointer' }}
+              >
+                SERVICIOS
+              </span>
+            </li>
+            <li className="header__item">
+              <span 
+                className="header__link" 
+                onClick={() => navigate('/therapy-sync')}
+                style={{ cursor: 'pointer' }}
+              >
+                THERAPY SYNC
+              </span>
+            </li>
+            <li className="header__item">
+              <span 
+                className="header__link" 
+                onClick={() => navigate('/agencias')}
+                style={{ cursor: 'pointer' }}
+              >
+                AGENCIAS
+              </span>
+            </li>
+            <li className="header__item">
+              <span 
+                className="header__link" 
+                onClick={() => navigate('/soporte')}
+                style={{ cursor: 'pointer' }}
+              >
+                SOPORTE
+              </span>
+            </li>
+          </ul>
         </nav>
         <div className="header__user">
-          <span className="header__username" onClick={toggleUserDropdown}>Luis Nava <i className="arrow-down"></i></span>
+          <span className="header__username" onClick={toggleUserDropdown}>Luis Nava <i className="fas fa-chevron-down"></i></span>
           <ul className="header__dropdown" style={{ display: showUserDropdown ? 'block' : 'none' }}>
             <li className="header__dropdown-item">
-              <a href="#" className="header__dropdown-link">Ver Credenciales</a>
+              <button className="header__dropdown-link">Ver Credenciales</button>
             </li>
             <li className="header__dropdown-item">
               <button className="header__dropdown-link" onClick={handleLogout}>Log Out</button>
@@ -231,11 +264,11 @@ const Welcome = () => {
           <div className="footer__section footer__links">
             <h3 className="footer__title">Enlaces Rápidos</h3>
             <ul className="footer__menu">
-              <li><a href="#" className="footer__link">Inicio</a></li>
-              <li><a href="#" className="footer__link">Pacientes</a></li>
-              <li><a href="#" className="footer__link">Terapeutas</a></li>
-              <li><a href="#" className="footer__link">Reportes</a></li>
-              <li><a href="#" className="footer__link">Soporte</a></li>
+              <li><span className="footer__link" onClick={() => navigate('/welcome')} style={{ cursor: 'pointer' }}>Inicio</span></li>
+              <li><span className="footer__link" onClick={() => navigate('/pacientes')} style={{ cursor: 'pointer' }}>Pacientes</span></li>
+              <li><span className="footer__link" onClick={() => navigate('/ubicacion')} style={{ cursor: 'pointer' }}>Terapeutas</span></li>
+              <li><span className="footer__link" onClick={() => navigate('/reportes')} style={{ cursor: 'pointer' }}>Reportes</span></li>
+              <li><span className="footer__link" onClick={() => navigate('/soporte')} style={{ cursor: 'pointer' }}>Soporte</span></li>
             </ul>
           </div>
           
