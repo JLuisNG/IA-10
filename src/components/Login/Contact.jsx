@@ -126,9 +126,9 @@ const Contact = ({ onBackToLogin }) => {
       </form>
       
       <div className="login__extra-links">
-        <a className="login__link" onClick={onBackToLogin}>
-          <i className="fas fa-arrow-left"></i> Back to Login
-        </a>
+      <button className="login__link" onClick={onBackToLogin}>
+    <i className="fas fa-arrow-left"></i> Back to Login
+    </button>
       </div>
     </>
   );

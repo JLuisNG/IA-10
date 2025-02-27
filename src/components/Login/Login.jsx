@@ -237,7 +237,9 @@ const Login = ({ onForgotPassword, onContactUs }) => {
       </form>
       
       <div className="login__extra-links">
-        <a href="#" className="login__link" onClick={onForgotPassword}>Forgot your password?</a> | <a href="#" className="login__link" onClick={onContactUs}>Contact Us</a>
+      <div className="login__extra-links">
+  <button className="login__link" onClick={onForgotPassword}>Forgot your password?</button> | <button className="login__link" onClick={onContactUs}>Contact Us</button>
+</div>
       </div>
     </>
   );
