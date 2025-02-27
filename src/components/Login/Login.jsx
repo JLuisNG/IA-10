@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import logoImg from '../../images/32A90059-EE8B-4689-A398-D08AC03A1AC6.jpeg';
 
 const Login = ({ onForgotPassword, onContactUs }) => {
   const navigate = useNavigate();
