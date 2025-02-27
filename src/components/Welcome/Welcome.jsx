@@ -123,14 +123,12 @@ const Welcome = () => {
           <img src={logoImg} alt="Logo" className="header__logo-img" />
         </div>
         <nav className="header__nav">
-          <ul className="header__menu">
-            <li className="header__item"><a href="#" className="header__link">UBICACIÓN DE SERVICIOS</a></li>
-            <li className="header__item"><a href="#" className="header__link">PACIENTES</a></li>
-            <li className="header__item"><a href="#" className="header__link">FRECUENCIAS</a></li>
-            <li className="header__item"><a href="#" className="header__link">THERAPY SYNC</a></li>
-            <li className="header__item"><a href="#" className="header__link">REFERRALS NEWS</a></li>
-            <li className="header__item"><a href="#" className="header__link">SOPORTE</a></li>
-          </ul>
+        <ul class="header__menu">
+                <li class="header__item"><a href="/Ubicacion.HTml" class="header__link">SERVICIOS</a></li>
+                <li class="header__item"><a href="/TS.html" class="header__link">THERAPY SYNC</a></li>
+                <li class="header__item"><a href="/Agencias.html" class="header__link">Agencias</a></li>
+                <li class="header__item"><a href="/Support.html" class="header__link">SOPORTE</a></li>
+            </ul>
         </nav>
         <div className="header__user">
           <span className="header__username" onClick={toggleUserDropdown}>Luis Nava <i className="arrow-down"></i></span>
