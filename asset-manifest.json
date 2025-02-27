@@ -1,14 +1,23 @@
 {
   "files": {
-    "main.css": "/IA-10/static/css/main.cd96479f.css",
-    "main.js": "/IA-10/static/js/main.feb52ca6.js",
-    "static/media/olas-en-la-orilla-del-mar_5120x2880_xtrafondos.com.jpg": "/IA-10/static/media/olas-en-la-orilla-del-mar_5120x2880_xtrafondos.com.b4304520b606e6eecf16.jpg",
+    "main.css": "/IA-10/static/css/main.5c802928.css",
+    "main.js": "/IA-10/static/js/main.518342dd.js",
+    "static/media/LosAngelesCity.jpg": "/IA-10/static/media/LosAngelesCity.f47a3fee6871446c9cde.jpg",
+    "static/media/fa-solid-900.ttf": "/IA-10/static/media/fa-solid-900.2582b0e4bcf85eceead0.ttf",
+    "static/media/32A90059-EE8B-4689-A398-D08AC03A1AC6.jpeg": "/IA-10/static/media/32A90059-EE8B-4689-A398-D08AC03A1AC6.421258215070fc96d2b4.jpeg",
+    "static/media/fa-brands-400.ttf": "/IA-10/static/media/fa-brands-400.1815e00441357e01619e.ttf",
+    "static/media/fa-solid-900.woff2": "/IA-10/static/media/fa-solid-900.2463b90d9a316e4e5294.woff2",
+    "static/media/fa-brands-400.woff2": "/IA-10/static/media/fa-brands-400.c210719e60948b211a12.woff2",
+    "static/media/fa-regular-400.ttf": "/IA-10/static/media/fa-regular-400.914997e1bdfc990d0897.ttf",
+    "static/media/fa-regular-400.woff2": "/IA-10/static/media/fa-regular-400.89999bdf5d835c012025.woff2",
+    "static/media/fa-v4compatibility.ttf": "/IA-10/static/media/fa-v4compatibility.da94ef451f4969af06e6.ttf",
+    "static/media/fa-v4compatibility.woff2": "/IA-10/static/media/fa-v4compatibility.ea8f94e1d22e0d35ccd4.woff2",
     "index.html": "/IA-10/index.html",
-    "main.cd96479f.css.map": "/IA-10/static/css/main.cd96479f.css.map",
-    "main.feb52ca6.js.map": "/IA-10/static/js/main.feb52ca6.js.map"
+    "main.5c802928.css.map": "/IA-10/static/css/main.5c802928.css.map",
+    "main.518342dd.js.map": "/IA-10/static/js/main.518342dd.js.map"
   },
   "entrypoints": [
-    "static/css/main.cd96479f.css",
-    "static/js/main.feb52ca6.js"
+    "static/css/main.5c802928.css",
+    "static/js/main.518342dd.js"
   ]
 }
