@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
+import { getTherapists, createTherapist, updateTherapist, deleteTherapist } from '../components/servicios/therapistAPI';
 
-// Constantes y configuración
 const CATEGORIES = {
   'premium': 'Premium (Verde)',
   'standard': 'Estándar (Azul)',
@@ -16,57 +16,32 @@ const DISCIPLINES = {
   'STA': 'Speech Therapy Assistant'
 };
 
-// Datos iniciales (en un entorno real, estos vendrían de una API)
-const initialTerapeutas = [
-  {
-    "name": "Ivan Lins",
-    "type": "PTA",
-    "category": "standard",
-    "areas": "San Fernando Valley, Van Nuys, Sherman Oaks, Northridge, Winnetka, Woodland Hills, West Hills, Porter Ranch, Reseda",
-    "languages": "english",
-    "phone": "(818) 697-3948",
-    "email": "ivanlins24@yahoo.com",
-    "status": "active"
-  },
-  {
-    "name": "Mikaela Chua",
-    "type": "PTA",
-    "category": "basic",
-    "areas": "Marina, Venice (some), Playa del Rey, Playa Vista, El Segundo, Manhattan Beach, Hermosa Beach, Redondo Beach, Lawndale, Torrance, Santa Monica (weekends for $75)",
-    "languages": "english",
-    "phone": "(310) 658-0493",
-    "email": "mikavchua@gmail.com",
-    "status": "active"
-  }
-];
-
 export const useTerapeutas = (searchTerm = '', filters = {}) => {
-  // Estado para almacenar los terapeutas
   const [terapeutas, setTerapeutas] = useState([]);
-  
-  // Cargar datos iniciales
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Cargar terapeutas desde la API
   useEffect(() => {
-    // En un entorno real, aquí haríamos una llamada a la API
-    // Por ahora, cargamos de localStorage o usamos los datos iniciales
-    const storedTerapeutas = JSON.parse(localStorage.getItem('therapists'));
-    if (storedTerapeutas && storedTerapeutas.length > 0) {
-      setTerapeutas(storedTerapeutas);
-    } else {
-      setTerapeutas(initialTerapeutas);
-      localStorage.setItem('therapists', JSON.stringify(initialTerapeutas));
-    }
+    const fetchTerapeutas = async () => {
+      try {
+        setLoading(true);
+        const data = await getTherapists();
+        setTerapeutas(data);
+        setLoading(false);
+      } catch (err) {
+        console.error('Error al cargar terapeutas:', err);
+        setError('Error al cargar los datos');
+        setLoading(false);
+      }
+    };
+
+    fetchTerapeutas();
   }, []);
 
-  // Guardar cambios en localStorage (simulando guardado en DB)
-  useEffect(() => {
-    if (terapeutas.length > 0) {
-      localStorage.setItem('therapists', JSON.stringify(terapeutas));
-    }
-  }, [terapeutas]);
-
-  // Extraer áreas únicas
+  // Obtener áreas únicas
   const areas = useMemo(() => {
-    const allAreas = terapeutas.flatMap(t => {
+    const areasList = terapeutas.flatMap(t => {
       const areasStr = t.areas || '';
       return areasStr
         .split(',')
@@ -74,73 +49,91 @@ export const useTerapeutas = (searchTerm = '', filters = {}) => {
         .filter(a => a.length > 0);
     });
     
-    return [...new Set(allAreas)].sort((a, b) => a.localeCompare(b));
+    return [...new Set(areasList)].sort();
   }, [terapeutas]);
 
-  // Filtrar terapeutas según búsqueda y filtros
+  // Filtrar terapeutas
   const filteredTerapeutas = useMemo(() => {
-    let filtered = [...terapeutas];
-    
-    // Aplicar búsqueda
-    if (searchTerm) {
-      const term = searchTerm.toLowerCase();
-      filtered = filtered.filter(terapeuta => 
+    return terapeutas.filter(terapeuta => {
+      // Filtro de búsqueda por término
+      const matchesSearch = !searchTerm || 
         Object.values(terapeuta).some(value => 
-          value && value.toString().toLowerCase().includes(term)
-        )
-      );
-    }
-    
-    // Aplicar filtros
-    if (filters.area) {
-      filtered = filtered.filter(t => 
-        t.areas && t.areas.toLowerCase().includes(filters.area.toLowerCase())
-      );
-    }
-    
-    if (filters.discipline) {
-      filtered = filtered.filter(t => t.type === filters.discipline);
-    }
-    
-    if (filters.category) {
-      filtered = filtered.filter(t => t.category === filters.category);
-    }
-    
-    return filtered;
+          value && value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      
+      // Filtros adicionales
+      const matchesArea = !filters.area || 
+        (terapeuta.areas && terapeuta.areas.toLowerCase().includes(filters.area.toLowerCase()));
+      
+      const matchesDiscipline = !filters.discipline || 
+        terapeuta.type === filters.discipline;
+      
+      const matchesCategory = !filters.category || 
+        terapeuta.category === filters.category;
+      
+      return matchesSearch && matchesArea && matchesDiscipline && matchesCategory;
+    });
   }, [terapeutas, searchTerm, filters]);
 
-  // Funciones CRUD
-  const addTerapeuta = (newTerapeuta) => {
-    // Validar que no exista un terapeuta con el mismo nombre
-    if (terapeutas.some(t => t.name === newTerapeuta.name)) {
-      alert(`Ya existe un terapeuta con el nombre: ${newTerapeuta.name}`);
+  // Agregar un nuevo terapeuta
+  const addTerapeuta = async (terapeutaData) => {
+    try {
+      const newTerapeuta = await createTherapist(terapeutaData);
+      setTerapeutas(prev => [...prev, newTerapeuta]);
+      return true;
+    } catch (error) {
+      console.error('Error al agregar terapeuta:', error);
       return false;
     }
-    
-    setTerapeutas(prev => [...prev, newTerapeuta]);
-    return true;
   };
 
-  const updateTerapeuta = (originalName, updatedTerapeuta) => {
-    // Si el nombre cambió, validar que no exista otro terapeuta con ese nombre
-    if (originalName !== updatedTerapeuta.name && 
-        terapeutas.some(t => t.name === updatedTerapeuta.name)) {
-      alert(`Ya existe un terapeuta con el nombre: ${updatedTerapeuta.name}`);
+  // Actualizar un terapeuta existente
+  const updateTerapeuta = async (name, terapeutaData) => {
+    try {
+      // Primero buscamos el terapeuta por nombre para obtener su ID
+      const terapeutaToUpdate = terapeutas.find(t => t.name === name);
+      
+      if (!terapeutaToUpdate || !terapeutaToUpdate.id) {
+        throw new Error('No se pudo encontrar el terapeuta para actualizar');
+      }
+      
+      const updatedTerapeuta = await updateTherapist(terapeutaToUpdate.id, terapeutaData);
+      
+      setTerapeutas(prev => 
+        prev.map(t => t.id === terapeutaToUpdate.id ? updatedTerapeuta : t)
+      );
+      
+      return true;
+    } catch (error) {
+      console.error('Error al actualizar terapeuta:', error);
       return false;
     }
-    
-    setTerapeutas(prev => 
-      prev.map(t => t.name === originalName ? updatedTerapeuta : t)
-    );
-    return true;
   };
 
-  const deleteTerapeuta = (name) => {
-    setTerapeutas(prev => prev.filter(t => t.name !== name));
-    return true;
+  // Eliminar un terapeuta
+  const deleteTerapeuta = async (name) => {
+    try {
+      // Primero buscamos el terapeuta por nombre para obtener su ID
+      const terapeutaToDelete = terapeutas.find(t => t.name === name);
+      
+      if (!terapeutaToDelete || !terapeutaToDelete.id) {
+        throw new Error('No se pudo encontrar el terapeuta para eliminar');
+      }
+      
+      await deleteTherapist(terapeutaToDelete.id);
+      
+      setTerapeutas(prev => 
+        prev.filter(t => t.id !== terapeutaToDelete.id)
+      );
+      
+      return true;
+    } catch (error) {
+      console.error('Error al eliminar terapeuta:', error);
+      return false;
+    }
   };
 
-  // Función para exportar los datos
+  // Exportar terapeutas a un archivo
   const exportTerapeutas = () => {
     const therapistsString = JSON.stringify(terapeutas, null, 2)
       .replace(/"([^"]+)":/g, '$1:')
@@ -164,6 +157,8 @@ const therapists = ${therapistsString};`;
     categories: CATEGORIES,
     disciplines: DISCIPLINES,
     areas,
+    loading,
+    error,
     addTerapeuta,
     updateTerapeuta,
     deleteTerapeuta,
