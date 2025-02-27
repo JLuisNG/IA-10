@@ -2,7 +2,7 @@ import React from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import LoginCard from './components/Login/LoginCard';
 import Welcome from './components/Welcome/Welcome';
-import UbicacionServicios from './components/Servicios/Ubicacion/UbicacionServicios';
+import UbicacionServicios from './components/servicios/Ubicacion/UbicacionServicios';
 // Importar FontAwesome
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
