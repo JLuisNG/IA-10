@@ -1,538 +1,532 @@
 /* Variables y ajustes globales */
 :root {
-    --primary-color: #1484c5;
-    --primary-dark: #18618b;
-    --accent-color: #6b1b99;
-    --text-dark: #2c3e50;
-    --text-light: #ffffff;
-    --glass-bg: rgba(255, 255, 255, 0.15);
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --shadow-color: rgba(0, 0, 0, 0.3);
-    --error-color: #ff3e3e;
-    --success-color: #4CAF50;
-    --input-bg: rgba(255, 255, 255, 0.1);
-  }
+  --primary-color: #1484c5;
+  --primary-dark: #18618b;
+  --accent-color: #6b1b99;
+  --text-dark: #2c3e50;
+  --text-light: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --error-color: #ff3e3e;
+  --success-color: #4CAF50;
+  --input-bg: rgba(255, 255, 255, 0.1);
+}
+
+// En SCSS podemos usar variables nativas
+$primary-color: #1484c5;
+$primary-dark: #18618b;
+$accent-color: #6b1b99;
+$text-dark: #2c3e50;
+$text-light: #ffffff;
+$glass-bg: rgba(255, 255, 255, 0.15);
+$glass-border: rgba(255, 255, 255, 0.2);
+$shadow-color: rgba(0, 0, 0, 0.3);
+$error-color: #ff3e3e;
+$success-color: #4CAF50;
+$input-bg: rgba(255, 255, 255, 0.1);
+
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+  position: relative;
   
-  // En SCSS podemos usar variables nativas
-  $primary-color: #1484c5;
-  $primary-dark: #18618b;
-  $accent-color: #6b1b99;
-  $text-dark: #2c3e50;
-  $text-light: #ffffff;
-  $glass-bg: rgba(255, 255, 255, 0.15);
-  $glass-border: rgba(255, 255, 255, 0.2);
-  $shadow-color: rgba(0, 0, 0, 0.3);
-  $error-color: #ff3e3e;
-  $success-color: #4CAF50;
-  $input-bg: rgba(255, 255, 255, 0.1);
-  
-  // Importar imagen de fondo
-  // En lugar de usar una ruta absoluta, vamos a importar la imagen en el componente
-  // mediante la importación de archivos en React
-  
-  .page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    overflow: hidden;
-    position: relative;
-    
-    &__background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      /* La imagen de fondo se manejará con un componente React para compatibilidad con GitHub Pages */
-      filter: blur(4px);
-      z-index: -1;
-      animation: zoomBackground 30s ease-in-out infinite alternate;
-    }
-  }
-  
-  /* Resto del código SCSS igual... */
-  
-  @keyframes zoomBackground {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.1); }
-  }
-  
-  /* Contenedor principal para el efecto de volteo */
-  .login-container {
-    perspective: 1000px;
-    width: 400px;
-    min-height: 540px;
-  }
-  
-  /* Tarjeta con efecto flip */
-  .login-card {
-    position: relative;
-    width: 100%;
-    transform-style: preserve-3d;
-    transition: transform 0.8s;
-    
-    &.flipped {
-      transform: rotateY(180deg);
-    }
-    
-    &.flipped-recovery {
-      transform: rotateY(180deg);
-    }
-    
-    &.flipped-contact {
-      transform: rotateY(180deg);
-    }
-  }
-  
-  /* Estilos comunes para todas las caras */
-  .login-card__front,
-  .login-card__back {
-    width: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    border-radius: 24px;
-  }
-  
-  /* Lados traseros (recuperación de contraseña y contacto) */
-  .login-card__back {
+  &__background {
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(4px);
+    z-index: -1;
+    animation: zoomBackground 30s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes zoomBackground {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
+}
+
+/* Contenedor principal para el efecto de volteo */
+.login-container {
+  perspective: 1000px;
+  width: 400px;
+  min-height: 540px;
+}
+
+/* Tarjeta con efecto flip */
+.login-card {
+  position: relative;
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+  
+  &.flipped {
     transform: rotateY(180deg);
-    display: none; /* Ocultar todos por defecto */
-    
-    // Permitir scroll en las tarjetas traseras si el contenido es muy largo
-    overflow-y: auto;
-    max-height: 90vh; /* Altura máxima del 90% de la ventana */
-    padding-right: 15px; /* Espacio para el scrollbar */
-    
-    // Estilos del login aplicados a los formularios traseros
-    background: $glass-bg;
-    backdrop-filter: blur(12px);
-    border: 1px solid $glass-border;
-    border-radius: 24px;
-    box-shadow: 0 8px 32px $shadow-color;
-    width: 400px;
-    padding: 2.5rem;
-    text-align: center;
   }
   
-  /* Contenedor principal con efecto glassmorphism */
-  .login {
-    background: $glass-bg;
-    backdrop-filter: blur(12px);
-    border: 1px solid $glass-border;
-    border-radius: 24px;
-    box-shadow: 0 8px 32px $shadow-color;
-    width: 400px;
-    padding: 2.5rem;
-    text-align: center;
-    transform: translateY(20px);
-    opacity: 0;
-    animation: slideUp 0.6s ease-out forwards;
+  &.flipped-recovery {
+    transform: rotateY(180deg);
   }
   
-  @keyframes slideUp {
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
+  &.flipped-contact {
+    transform: rotateY(180deg);
   }
+}
+
+/* Estilos comunes para todas las caras */
+.login-card__front,
+.login-card__back {
+  width: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 24px;
+}
+
+/* Lados traseros (recuperación de contraseña y contacto) */
+.login-card__back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotateY(180deg);
+  display: none; /* Ocultar todos por defecto */
   
-  /* Logo con animación */
-  .login__logo {
-    margin-bottom: 1.5rem;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    
-    &-img {
-      width: 120px;
-      border-radius: 15px;
-      transform: scale(0.9);
-      transition: transform 0.3s ease;
-      animation: logoAppear 0.6s ease-out 0.3s backwards;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      
-      &:hover {
-        transform: scale(1);
-      }
-    }
+  // Permitir scroll en las tarjetas traseras si el contenido es muy largo
+  overflow-y: auto;
+  max-height: 90vh; /* Altura máxima del 90% de la ventana */
+  padding-right: 15px; /* Espacio para el scrollbar */
+  
+  // Estilos del login aplicados a los formularios traseros
+  background: $glass-bg;
+  backdrop-filter: blur(12px);
+  border: 1px solid $glass-border;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px $shadow-color;
+  width: 400px;
+  padding: 2.5rem;
+  text-align: center;
+}
+
+/* Contenedor principal con efecto glassmorphism */
+.login {
+  background: $glass-bg;
+  backdrop-filter: blur(12px);
+  border: 1px solid $glass-border;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px $shadow-color;
+  width: 400px;
+  padding: 2.5rem;
+  text-align: center;
+  transform: translateY(20px);
+  opacity: 0;
+  animation: slideUp 0.6s ease-out forwards;
+}
+
+@keyframes slideUp {
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
+}
+
+/* Logo con animación */
+.login__logo {
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: flex;
+  justify-content: center;
   
-  @keyframes logoAppear {
-    from {
-      transform: scale(0.5);
-      opacity: 0;
-    }
-    to {
-      transform: scale(0.9);
-      opacity: 1;
-    }
-  }
-  
-  /* Título con efecto de aparición */
-  .login__title {
-    margin-bottom: 1.8rem;
-    font-size: 2.2rem;
-    color: $text-light;
-    font-weight: 600;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    opacity: 0;
-    animation: fadeIn 0.6s ease-out 0.6s forwards;
-    letter-spacing: 1px;
-  }
-  
-  /* Campos del formulario */
-  .login__form-group {
-    margin-bottom: 1.8rem;
-    opacity: 0;
-    animation: fadeIn 0.6s ease-out 0.9s forwards;
-    position: relative;
-    
-    &.error {
-      .login__input {
-        border-color: $error-color;
-        box-shadow: 0 4px 12px rgba(255, 62, 62, 0.2);
-      }
-      
-      .login__label i {
-        color: $error-color;
-      }
-      
-      .login__error-message {
-        display: block;
-      }
-    }
-    
-    &.success {
-      .login__input {
-        border-color: $success-color;
-        box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
-      }
-      
-      .login__label i {
-        color: $success-color;
-      }
-    }
-    
-    &.form-focus {
-      .login__input-wrapper::after {
-        width: 100%;
-      }
-    }
-  }
-  
-  .login__label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 1rem;
-    margin-bottom: 0.8rem;
-    text-align: left;
-    color: $text-light;
-    font-weight: 500;
-    
-    i {
-      color: $primary-color;
-      transition: color 0.3s ease;
-      font-size: 1.1rem;
-    }
-  }
-  
-  /* Estilos modernos para el input */
-  .login__input {
-    width: 100%;
-    padding: 1rem 1.2rem;
-    background: $input-bg;
-    border: 2px solid transparent;
-    border-radius: 12px;
-    font-size: 1rem;
-    color: $text-light;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-sizing: border-box;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    
-    &::placeholder {
-      color: rgba(255, 255, 255, 0.5);
-    }
-    
-    &:focus {
-      outline: none;
-      border-color: $primary-color;
-      background: rgba(255, 255, 255, 0.15);
-      box-shadow: 0 5px 15px rgba(20, 132, 197, 0.2);
-      transform: translateY(-2px);
-    }
-  }
-  
-  /* Textarea */
-  .login__textarea {
-    min-height: 120px;
-    resize: vertical;
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  /* Efecto de entrada para input */
-  .login__input-wrapper {
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-    
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background: linear-gradient(to right, $primary-color, $accent-color);
-      transition: width 0.3s ease;
-    }
-  }
-  
-  /* Error message */
-  .login__error-message {
-    color: $error-color;
-    font-size: 0.85rem;
-    margin-top: 0.5rem;
-    display: none;
-    text-align: left;
-    animation: fadeIn 0.3s ease-out;
-  }
-  
-  /* Botón con efectos modernos */
-  .login__button {
-    background: linear-gradient(135deg, $primary-color, $primary-dark);
-    color: $text-light;
-    border: none;
-    padding: 1.1rem;
-    width: 100%;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    position: relative;
-    overflow: hidden;
-    opacity: 0;
-    animation: fadeIn 0.6s ease-out 1.2s forwards;
-    box-shadow: 0 4px 12px rgba(20, 132, 197, 0.3);
-    letter-spacing: 1px;
-    
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        90deg, 
-        rgba(255, 255, 255, 0) 0%, 
-        rgba(255, 255, 255, 0.2) 50%, 
-        rgba(255, 255, 255, 0) 100%
-      );
-      transition: left 0.7s ease;
-    }
+  &-img {
+    width: 120px;
+    border-radius: 15px;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+    animation: logoAppear 0.6s ease-out 0.3s backwards;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     
     &:hover {
-      background: linear-gradient(135deg, $primary-dark, $accent-color);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(20, 132, 197, 0.5);
-      
-      &::before {
-        left: 100%;
-      }
-    }
-    
-    &:active {
-      transform: translateY(1px);
-      box-shadow: 0 2px 8px rgba(20, 132, 197, 0.4);
-    }
-    
-    &:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
+      transform: scale(1);
     }
   }
-  
-  /* Enlaces adicionales */
-  .login__extra-links {
-    margin-top: 1.8rem;
+}
+
+@keyframes logoAppear {
+  from {
+    transform: scale(0.5);
     opacity: 0;
-    animation: fadeIn 0.6s ease-out 1.5s forwards;
+  }
+  to {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+}
+
+/* Título con efecto de aparición */
+.login__title {
+  margin-bottom: 1.8rem;
+  font-size: 2.2rem;
+  color: $text-light;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out 0.6s forwards;
+  letter-spacing: 1px;
+}
+
+/* Campos del formulario */
+.login__form-group {
+  margin-bottom: 1.8rem;
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out 0.9s forwards;
+  position: relative;
+  
+  &.error {
+    .login__input {
+      border-color: $error-color;
+      box-shadow: 0 4px 12px rgba(255, 62, 62, 0.2);
+    }
+    
+    .login__label i {
+      color: $error-color;
+    }
+    
+    .login__error-message {
+      display: block;
+    }
   }
   
-  .login__link {
-    color: $text-light;
-    text-decoration: none;
-    font-size: 0.9rem;
-    margin: 0 0.5rem;
-    transition: all 0.3s ease;
-    position: relative;
-    padding: 2px;
-    cursor: pointer;
+  &.success {
+    .login__input {
+      border-color: $success-color;
+      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+    }
     
-    &::before {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
+    .login__label i {
+      color: $success-color;
+    }
+  }
+  
+  &.form-focus {
+    .login__input-wrapper::after {
       width: 100%;
-      height: 1px;
-      background: $text-light;
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 0.4s ease;
-    }
-    
-    &:hover {
-      color: $primary-color;
-      
-      &::before {
-        transform: scaleX(1);
-        transform-origin: left;
-      }
     }
   }
+}
+
+.login__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+  text-align: left;
+  color: $text-light;
+  font-weight: 500;
   
-  /* Estilos adicionales para el formulario de recuperación */
-  .password-recovery__text {
-    color: $text-light;
-    margin-bottom: 2rem;
-    font-size: 0.95rem;
-    line-height: 1.5;
-  }
-  
-  /* Email de contacto */
-  .contact-email {
-    display: inline-block;
-    font-weight: 500;
+  i {
     color: $primary-color;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    margin: 0.5rem 0 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 1.1rem;
+  }
+}
+
+/* Estilos modernos para el input */
+.login__input {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  background: $input-bg;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  font-size: 1rem;
+  color: $text-light;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-sizing: border-box;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 5px 15px rgba(20, 132, 197, 0.2);
+    transform: translateY(-2px);
+  }
+}
+
+/* Textarea */
+.login__textarea {
+  min-height: 120px;
+  resize: vertical;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Efecto de entrada para input */
+.login__input-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(to right, $primary-color, $accent-color);
+    transition: width 0.3s ease;
+  }
+}
+
+/* Error message */
+.login__error-message {
+  color: $error-color;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  display: none;
+  text-align: left;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Botón con efectos modernos */
+/* Botón con efectos modernos */
+.login__button {
+  background: linear-gradient(135deg, $primary-color, $primary-dark);
+  color: $text-light;
+  border: none;
+  padding: 1.1rem;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out 1.2s forwards;
+  box-shadow: 0 4px 12px rgba(20, 132, 197, 0.3);
+  letter-spacing: 1px;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg, 
+      rgba(255, 255, 255, 0) 0%, 
+      rgba(255, 255, 255, 0.2) 50%, 
+      rgba(255, 255, 255, 0) 100%
+    );
+    transition: left 0.7s ease;
+  }
+  
+  &:hover {
+    background: linear-gradient(135deg, $primary-dark, $accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(20, 132, 197, 0.5);
     
-    i {
-      margin-right: 5px;
+    &::before {
+      left: 100%;
     }
   }
   
-  /* Pulsación en campos de formulario */
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.02); }
-    100% { transform: scale(1); }
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(20, 132, 197, 0.4);
   }
   
-  .form-pulse {
-    animation: pulse 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+/* Enlaces adicionales */
+.login__extra-links {
+  margin-top: 1.8rem;
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out 1.5s forwards;
+}
+
+.login__link {
+  color: $text-light;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin: 0 0.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 2px;
+  cursor: pointer;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: $text-light;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s ease;
   }
   
-  /* Animación de fadeIn */
-  @keyframes fadeIn {
-    to {
-      opacity: 1;
+  &:hover {
+    color: $primary-color;
+    
+    &::before {
+      transform: scaleX(1);
+      transform-origin: left;
     }
   }
+}
+
+/* Estilos adicionales para el formulario de recuperación */
+.password-recovery__text {
+  color: $text-light;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Email de contacto */
+.contact-email {
+  display: inline-block;
+  font-weight: 500;
+  color: $primary-color;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  margin: 0.5rem 0 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
   
-  /* Responsive */
-  @media (max-width: 480px) {
-    .login, .login-card__back, .login-container {
-      width: 90%;
+  i {
+    margin-right: 5px;
+  }
+}
+
+/* Pulsación en campos de formulario */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.form-pulse {
+  animation: pulse 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Animación de fadeIn */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login, .login-card__back, .login-container {
+    width: 90%;
+  }
+  
+  .login, .login-card__back {
+    padding: 2rem;
+  }
+  
+  #contactCard {
+    .login__logo-img {
+      width: 90px;
     }
     
-    .login, .login-card__back {
-      padding: 2rem;
+    .login__title {
+      font-size: 1.8rem;
+      margin-bottom: 0.7rem;
     }
     
-    #contactCard {
-      .login__logo-img {
-        width: 90px;
-      }
-      
-      .login__title {
-        font-size: 1.8rem;
-        margin-bottom: 0.7rem;
-      }
-      
-      .password-recovery__text {
-        font-size: 0.9rem;
-        margin-bottom: 0.7rem;
-      }
-      
-      .login__form-group {
-        margin-bottom: 0.9rem;
-      }
-      
-      .login__label {
-        margin-bottom: 0.4rem;
-      }
-      
-      .login__input {
-        padding: 0.8rem 1rem;
-      }
-      
-      .login__textarea {
-        min-height: 60px;
-      }
-      
-      .login__button {
-        padding: 0.9rem;
-      }
-      
-      .login__extra-links {
-        margin-top: 1rem;
-      }
+    .password-recovery__text {
+      font-size: 0.9rem;
+      margin-bottom: 0.7rem;
+    }
+    
+    .login__form-group {
+      margin-bottom: 0.9rem;
+    }
+    
+    .login__label {
+      margin-bottom: 0.4rem;
+    }
+    
+    .login__input {
+      padding: 0.8rem 1rem;
+    }
+    
+    .login__textarea {
+      min-height: 60px;
+    }
+    
+    .login__button {
+      padding: 0.9rem;
+    }
+    
+    .login__extra-links {
+      margin-top: 1rem;
     }
   }
-  
-  @media (max-height: 700px) {
-    #contactCard {
-      .login__logo-img {
-        width: 90px;
-      }
-      
-      .login__title {
-        font-size: 1.8rem;
-        margin-bottom: 0.7rem;
-      }
-      
-      .password-recovery__text {
-        font-size: 0.9rem;
-        margin-bottom: 0.7rem;
-      }
-      
-      .login__form-group {
-        margin-bottom: 0.9rem;
-      }
-      
-      .login__label {
-        margin-bottom: 0.4rem;
-      }
-      
-      .login__input {
-        padding: 0.8rem 1rem;
-      }
-      
-      .login__textarea {
-        min-height: 60px;
-      }
-      
-      .login__button {
-        padding: 0.9rem;
-      }
-      
-      .login__extra-links {
-        margin-top: 1rem;
-      }
+}
+
+@media (max-height: 700px) {
+  #contactCard {
+    .login__logo-img {
+      width: 90px;
+    }
+    
+    .login__title {
+      font-size: 1.8rem;
+      margin-bottom: 0.7rem;
+    }
+    
+    .password-recovery__text {
+      font-size: 0.9rem;
+      margin-bottom: 0.7rem;
+    }
+    
+    .login__form-group {
+      margin-bottom: 0.9rem;
+    }
+    
+    .login__label {
+      margin-bottom: 0.4rem;
+    }
+    
+    .login__input {
+      padding: 0.8rem 1rem;
+    }
+    
+    .login__textarea {
+      min-height: 60px;
+    }
+    
+    .login__button {
+      padding: 0.9rem;
+    }
+    
+    .login__extra-links {
+      margin-top: 1rem;
     }
   }
+}

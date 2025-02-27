@@ -3,6 +3,7 @@ import Login from './Login';
 import PasswordRecovery from './PasswordRecovery';
 import Contact from './Contact';
 import '../../styles/Login.scss';
+import backgroundImg from '../../images/LosAngelesCity.jpg';
 
 const LoginCard = () => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -41,7 +42,10 @@ const LoginCard = () => {
 
   return (
     <div className="page">
-      <div className="page__background"></div>
+      <div 
+        className="page__background" 
+        style={{ backgroundImage: `url(${backgroundImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+      ></div>
       <div className="login-container">
         <div 
           className={`login-card ${isFlipped ? 'flipped' : ''} ${activeCard === 'recovery' ? 'flipped-recovery' : ''} ${activeCard === 'contact' ? 'flipped-contact' : ''}`} 

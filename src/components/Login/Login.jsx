@@ -183,7 +183,7 @@ const Login = ({ onForgotPassword, onContactUs }) => {
   return (
     <>
       <div className="login__logo">
-        <img src="/IMG/32A90059-EE8B-4689-A398-D08AC03A1AC6.jpeg" alt="Motive Homecare Logo" className="login__logo-img" />
+        <img src={logoImg} alt="Motive Homecare Logo" className="login__logo-img" />
       </div>
       
       <h2 className="login__title">Login</h2>
