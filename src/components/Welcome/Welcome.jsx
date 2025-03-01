@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import '../../styles/Welcome.scss';
 import logoImg from '../../images/32A90059-EE8B-4689-A398-D08AC03A1AC6.jpeg';
-
 
 const Welcome = () => {
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ const Welcome = () => {
       // Animar el contador de pacientes
       animateCounter(6467, 2000);
     }, 2000);
-
+    
     return () => clearTimeout(loadingTimeout);
   }, []);
 
@@ -43,7 +42,6 @@ const Welcome = () => {
         setShowUserDropdown(false);
       }
     };
-
     document.addEventListener('click', handleClickOutside);
     return () => {
       document.removeEventListener('click', handleClickOutside);
@@ -54,7 +52,6 @@ const Welcome = () => {
   const animateCounter = (target, duration) => {
     const counterElement = document.querySelector('.counter-number');
     if (!counterElement) return;
-
     let start = 0;
     const increment = (timestamp) => {
       if (!start) start = timestamp;
@@ -121,45 +118,23 @@ const Welcome = () => {
       {/* Barra superior */}
       <header className="header">
         <div className="header__logo">
-          <img src={logoImg} alt="Logo" className="header__logo-img" />
+          <Link to="/welcome">
+            <img src={logoImg} alt="Logo" className="header__logo-img" />
+          </Link>
         </div>
         <nav className="header__nav">
           <ul className="header__menu">
             <li className="header__item">
-              <span 
-                className="header__link" 
-                onClick={() => navigate('/ubicacion')}
-                style={{ cursor: 'pointer' }}
-              >
-                SERVICIOS
-              </span>
+              <Link to="/ubicacion" className="header__link">UBICACIÓN DE SERVICIOS</Link>
             </li>
             <li className="header__item">
-              <span 
-                className="header__link" 
-                onClick={() => navigate('/therapy-sync')}
-                style={{ cursor: 'pointer' }}
-              >
-                THERAPY SYNC
-              </span>
+              <Link to="/therapy-sync" className="header__link">THERAPY SYNC</Link>
             </li>
             <li className="header__item">
-              <span 
-                className="header__link" 
-                onClick={() => navigate('/agencias')}
-                style={{ cursor: 'pointer' }}
-              >
-                AGENCIAS
-              </span>
+              <Link to="/agencias" className="header__link">AGENCIAS</Link>
             </li>
             <li className="header__item">
-              <span 
-                className="header__link" 
-                onClick={() => navigate('/soporte')}
-                style={{ cursor: 'pointer' }}
-              >
-                SOPORTE
-              </span>
+              <Link to="/soporte" className="header__link">SOPORTE</Link>
             </li>
           </ul>
         </nav>
@@ -264,11 +239,12 @@ const Welcome = () => {
           <div className="footer__section footer__links">
             <h3 className="footer__title">Enlaces Rápidos</h3>
             <ul className="footer__menu">
-              <li><span className="footer__link" onClick={() => navigate('/welcome')} style={{ cursor: 'pointer' }}>Inicio</span></li>
-              <li><span className="footer__link" onClick={() => navigate('/pacientes')} style={{ cursor: 'pointer' }}>Pacientes</span></li>
-              <li><span className="footer__link" onClick={() => navigate('/ubicacion')} style={{ cursor: 'pointer' }}>Terapeutas</span></li>
-              <li><span className="footer__link" onClick={() => navigate('/reportes')} style={{ cursor: 'pointer' }}>Reportes</span></li>
-              <li><span className="footer__link" onClick={() => navigate('/soporte')} style={{ cursor: 'pointer' }}>Soporte</span></li>
+              <li><Link to="/welcome" className="footer__link">Inicio</Link></li>
+              <li><Link to="/pacientes" className="footer__link">Pacientes</Link></li>
+              <li><Link to="/ubicacion" className="footer__link">Terapeutas</Link></li>
+              <li><Link to="/agencias" className="footer__link">Agencias</Link></li>
+              <li><Link to="/reportes" className="footer__link">Reportes</Link></li>
+              <li><Link to="/soporte" className="footer__link">Soporte</Link></li>
             </ul>
           </div>
           

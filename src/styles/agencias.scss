@@ -1,0 +1,963 @@
+/* Variables específicas para agencias */
+
+:root {
+    --agency-bg: rgba(255, 255, 255, 0.05);
+    --agency-hover: rgba(64, 156, 255, 0.1);
+    --agency-border: rgba(64, 156, 255, 0.3);
+    --agency-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    --agency-text: #ffffff;
+    --agency-text-light: rgba(255, 255, 255, 0.8);
+    --agency-success: #4CAF50;
+    --agency-danger: #f44336;
+    --agency-warning: #ff9800;
+    --accent-color: #409CFF;
+    --primary-color: #1E3A5F;
+  }
+  
+  // Contenedor principal
+  .agencies-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    min-height: calc(100vh - 200px);
+  }
+  
+  // Contador global de pacientes
+  .global-patients-counter {
+    margin-bottom: 2rem;
+    
+    .global-patients-card {
+      background: var(--agency-bg);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 1.5rem;
+      border: 1px solid var(--agency-border);
+      text-align: center;
+      
+      h2 {
+        font-size: 1.5rem;
+        color: var(--agency-text);
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+      
+      .global-counter {
+        .counter-number {
+          font-size: 3.5rem;
+          font-weight: 700;
+          color: var(--accent-color);
+          display: block;
+        }
+      }
+    }
+  }
+  
+  // Buscador y botón de nueva agencia
+  .agencies-search {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    
+    .search-box {
+      flex: 1;
+      display: flex;
+      background: var(--agency-bg);
+      border-radius: 50px;
+      padding: 0.5rem;
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--agency-border);
+      
+      .search-input {
+        flex: 1;
+        background: none;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        color: var(--agency-text);
+        font-size: 1rem;
+        
+        &::placeholder {
+          color: var(--agency-text-light);
+        }
+      }
+      
+      .search-btn {
+        background: var(--agency-hover);
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        color: var(--agency-text);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          background: var(--accent-color);
+          transform: scale(1.05);
+        }
+      }
+    }
+    
+    .add-agency-btn {
+      background: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 0 2rem;
+      border-radius: 50px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(64, 156, 255, 0.3);
+      }
+    }
+  }
+  
+  // Grid de agencias
+  .agencies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  // Tarjeta de agencia
+  .agency-card {
+    background: var(--agency-bg);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 1.5rem;
+    border: 1px solid var(--agency-border);
+    transition: all 0.4s ease;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--agency-shadow);
+      background: var(--agency-hover);
+    }
+    
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      
+      .agency-logo {
+        width: 64px;
+        height: 64px;
+        overflow: hidden;
+        border-radius: 50%;
+        margin-right: 1rem;
+        
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+    
+    &__name {
+      font-size: 1.25rem;
+      color: var(--agency-text);
+      margin: 0;
+      font-weight: 600;
+      flex: 1;
+    }
+    
+    &__actions {
+      display: flex;
+      gap: 0.5rem;
+      
+      button {
+        background: none;
+        border: none;
+        color: var(--agency-text-light);
+        padding: 0.5rem;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        &.edit-btn:hover {
+          color: var(--accent-color);
+          background: var(--agency-hover);
+        }
+        
+        &.delete-btn:hover {
+          color: var(--agency-danger);
+          background: var(--agency-hover);
+        }
+      }
+    }
+    
+    &__content {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      
+      .agency-contact-info {
+        p {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          color: var(--agency-text-light);
+          margin: 0.5rem 0;
+          
+          i {
+            width: 16px;
+            text-align: center;
+          }
+        }
+      }
+      
+      .agency-patient-counter {
+        background: var(--agency-hover);
+        padding: 1rem;
+        border-radius: 15px;
+        text-align: center;
+        margin: 1rem 0;
+        
+        .counter-number {
+          font-size: 2rem;
+          font-weight: 700;
+          color: var(--accent-color);
+          display: block;
+        }
+        
+        .counter-label {
+          font-size: 0.9rem;
+          color: var(--agency-text-light);
+        }
+      }
+      
+      .agency-status-docs {
+        p {
+          margin: 0.5rem 0;
+          color: var(--agency-text-light);
+          
+          strong {
+            color: var(--agency-text);
+            margin-right: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+
+// Modal con diseño premium y efectos visuales impactantes
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85); // Fondo muy oscuro para contraste
+    backdrop-filter: blur(15px); // Blur intenso
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; // Prevenir scroll del body
+    
+    &.active {
+      display: flex;
+      opacity: 1;
+      
+      // Efecto de partículas de fondo
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: 
+          radial-gradient(circle at 20% 35%, rgba(76, 29, 149, 0.15) 0%, transparent 50%),
+          radial-gradient(circle at 75% 44%, rgba(14, 165, 233, 0.15) 0%, transparent 50%);
+        opacity: 0.8;
+        z-index: -1;
+        animation: backgroundPulse 8s infinite alternate ease-in-out;
+      }
+    }
+    
+    &__overlay {
+      position: absolute;
+      inset: 0;
+      cursor: pointer;
+      
+      // Efecto de líneas del grid en el fondo
+      background-image: 
+        linear-gradient(rgba(99, 102, 241, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99, 102, 241, 0.1) 1px, transparent 1px);
+      background-size: 25px 25px;
+      background-position: center center;
+      animation: gridMove 40s linear infinite;
+    }
+    
+    &__content {
+      background: linear-gradient(135deg, #0F172A 0%, #0C1222 100%); // Azul muy oscuro, casi negro
+      width: 90%;
+      max-width: 680px;
+      margin: auto;
+      position: relative;
+      transform: translateY(-30px);
+      transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      border-radius: 20px;
+      overflow: auto; // Cambiar a auto para permitir scroll
+      max-height: 90vh; // Aumentado para mostrar más contenido
+      box-shadow: 
+        0 20px 50px -12px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(14, 165, 233, 0.15),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+      
+      // Borde resplandeciente
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 20px;
+        padding: 2px; // Grosor del borde
+        background: linear-gradient(
+          45deg, 
+          rgba(76, 29, 149, 0.5) 0%, 
+          rgba(14, 165, 233, 0.5) 25%,
+          rgba(79, 70, 229, 0.5) 50%,
+          rgba(14, 165, 233, 0.5) 75%,
+          rgba(76, 29, 149, 0.5) 100%
+        );
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        background-size: 400% 400%;
+        animation: borderGradient 8s linear infinite;
+      }
+      
+      &--small {
+        max-width: 450px;
+      }
+    }
+    
+    &.active &__content {
+      transform: translateY(0);
+      opacity: 1;
+      animation: modalEnter 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    
+    // Encabezado modal con efecto de brillo
+    &__header {
+      padding: 1.8rem 2.2rem;
+      position: relative;
+      background: linear-gradient(90deg, rgba(15, 23, 42, 0.7) 0%, rgba(12, 18, 34, 0.7) 100%);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+      // Efecto de línea resplandeciente
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 1px;
+        width: 100%;
+        background: linear-gradient(
+          90deg, 
+          transparent 0%, 
+          rgba(14, 165, 233, 0.6) 50%, 
+          transparent 100%
+        );
+        filter: blur(1px);
+      }
+      
+      h2 {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.95);
+        font-size: 1.75rem;
+        font-weight: 600;
+        position: relative;
+        letter-spacing: 0.5px;
+        text-shadow: 0 2px 10px rgba(14, 165, 233, 0.2);
+        
+        // Línea debajo del texto
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -8px;
+          width: 50px;
+          height: 3px;
+          border-radius: 3px;
+          background: linear-gradient(90deg, #38BDF8 0%, #0EA5E9 100%);
+        }
+      }
+    }
+    
+    &__close {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+      width: 38px;
+      height: 38px;
+      font-size: 1.2rem;
+      transition: all 0.25s ease;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      
+      &:hover {
+        color: white;
+        border-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 15px rgba(14, 165, 233, 0.25);
+        transform: translateY(-2px);
+        
+        // Efecto de resplandor al hacer hover
+        &::before {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      
+      // Efecto de resplandor
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at center, rgba(14, 165, 233, 0.2) 0%, transparent 70%);
+        opacity: 0;
+        transform: scale(0.6);
+        transition: all 0.3s ease;
+      }
+    }
+    
+    &__body {
+      padding: 2.5rem;
+      background: rgba(15, 23, 42, 0.4);
+      max-height: none; // Quitar restricción de altura
+      padding-bottom: 3rem; // Más espacio abajo
+      
+      // Custom scrollbar
+      &::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+      }
+      
+      &::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 10px;
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, #38BDF8 0%, #0EA5E9 100%);
+        border-radius: 10px;
+      }
+      
+      &::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(180deg, #0EA5E9 0%, #0284C7 100%);
+      }
+      
+      // Esconder scrollbar cuando no está en uso
+      &::-webkit-scrollbar {
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      
+      &:hover::-webkit-scrollbar {
+        opacity: 1;
+      }
+      
+      .warning-text {
+        color: #F87171;
+        font-weight: 500;
+      }
+    }
+    
+    &__footer {
+      padding: 1.5rem 2.2rem;
+      background: rgba(12, 18, 34, 0.7);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      position: relative;
+      
+      // Efecto de brillo en el borde
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 1px;
+        width: 100%;
+        background: linear-gradient(
+          90deg, 
+          transparent 0%, 
+          rgba(14, 165, 233, 0.6) 50%, 
+          transparent 100%
+        );
+        filter: blur(1px);
+      }
+    }
+  }
+  
+  // Área de carga de logo de alta calidad
+  .agency-logo-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3rem;
+    
+    .agency-logo-preview {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: rgba(12, 18, 34, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1.2rem;
+      overflow: hidden;
+      position: relative;
+      transition: all 0.3s ease;
+      border: 2px dashed rgba(14, 165, 233, 0.3);
+      box-shadow: 
+        0 0 25px rgba(14, 165, 233, 0.15),
+        0 10px 20px -10px rgba(0, 0, 0, 0.3);
+      
+      img {
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        filter: drop-shadow(0 0 5px rgba(14, 165, 233, 0.3));
+      }
+      
+      // Efecto de hover
+      &:hover {
+        border-color: rgba(14, 165, 233, 0.6);
+        
+        &::after {
+          opacity: 1;
+        }
+        
+        img {
+          transform: scale(1.05);
+          filter: drop-shadow(0 0 8px rgba(14, 165, 233, 0.5));
+        }
+      }
+      
+      // Overlay con mensaje
+      &::after {
+        content: 'Cambiar Logo';
+        position: absolute;
+        inset: 0;
+        background: rgba(12, 18, 34, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        border-radius: 50%;
+        font-size: 0.9rem;
+      }
+    }
+    
+    .logo-preview-text {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      letter-spacing: 0.5px;
+    }
+    
+    input[type="file"] {
+      display: none;
+    }
+    
+    .logo-upload-btn {
+      background: linear-gradient(135deg, #38BDF8 0%, #0EA5E9 100%);
+      color: white;
+      padding: 0.8rem 2rem;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: none;
+      box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+        0 2px 4px -1px rgba(0, 0, 0, 0.06),
+        0 0 15px rgba(14, 165, 233, 0.25);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      position: relative;
+      overflow: hidden;
+      
+      // Efecto de brillo
+      &::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          to bottom right,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.1) 100%
+        );
+        transform: rotate(45deg);
+        transition: transform 0.6s;
+        z-index: 1;
+      }
+      
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 
+          0 10px 20px -5px rgba(0, 0, 0, 0.2),
+          0 0 20px rgba(14, 165, 233, 0.4);
+        
+        &::before {
+          transform: rotate(45deg) translateX(120%);
+        }
+      }
+      
+      i {
+        font-size: 1.1rem;
+        z-index: 2;
+      }
+      
+      span {
+        z-index: 2;
+      }
+    }
+  }
+  
+  // Secciones del formulario con diseño premium
+  .form {
+    &__section {
+      margin-bottom: 2.8rem;
+      
+      h3 {
+        color: #38BDF8; // Color celeste brillante
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 1.8rem;
+        position: relative;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        padding-left: 1.2rem;
+        
+        // Punto decorativo
+        &::before {
+          content: '•';
+          position: absolute;
+          left: 0;
+          top: 0;
+          color: #0EA5E9;
+          font-size: 1.5rem;
+          line-height: 1;
+          text-shadow: 0 0 10px rgba(14, 165, 233, 0.5);
+        }
+        
+        // Línea decorativa horizontal
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -10px;
+          left: 0;
+          width: 100%;
+          height: 1px;
+          background: linear-gradient(90deg, rgba(14, 165, 233, 0.7) 0%, transparent 100%);
+        }
+      }
+    }
+    
+    &__two-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+    }
+    
+    &__group {
+      margin-bottom: 1.8rem;
+      position: relative;
+      
+      label {
+        display: block;
+        margin-bottom: 0.7rem;
+        color: rgba(255, 255, 255, 0.85);
+        font-weight: 500;
+        font-size: 0.95rem;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+        position: relative;
+        padding-left: 0.5rem;
+        
+        // Pequeña línea vertical
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 100%;
+          width: 2px;
+          background: #38BDF8;
+          border-radius: 1px;
+          opacity: 0.8;
+        }
+      }
+      
+      input {
+        width: 100%;
+        padding: 1rem 1.2rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.03);
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+        
+        &:focus {
+          outline: none;
+          border-color: rgba(14, 165, 233, 0.5);
+          box-shadow: 
+            0 0 0 3px rgba(14, 165, 233, 0.15),
+            inset 0 2px 4px rgba(0, 0, 0, 0.06);
+          background: rgba(255, 255, 255, 0.05);
+        }
+        
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.3);
+        }
+      }
+      
+      // Focus en el label cuando input tiene focus
+      input:focus + label {
+        color: #38BDF8;
+      }
+      
+      &.invalid {
+        input {
+          border-color: rgba(239, 68, 68, 0.5);
+          box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.15);
+          
+          &:focus {
+            border-color: rgba(239, 68, 68, 0.6);
+          }
+        }
+        
+        label::before {
+          background: #EF4444;
+        }
+      }
+      
+      .validation-error {
+        color: #F87171;
+        font-size: 0.85rem;
+        margin-top: 0.5rem;
+        display: none;
+        font-weight: 500;
+        animation: fadeIn 0.3s ease;
+        padding-left: 0.5rem;
+      }
+      
+      &.invalid .validation-error {
+        display: block;
+        animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+      }
+    }
+  }
+  
+  // Botones con diseño premium
+  .btn {
+    padding: 0.9rem 2.2rem;
+    border: none;
+    border-radius: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    min-width: 140px;
+    text-align: center;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    
+    i {
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+    
+    &--primary {
+      background: linear-gradient(135deg, #38BDF8 0%, #0EA5E9 100%);
+      color: white;
+      box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+        0 2px 4px -1px rgba(0, 0, 0, 0.06),
+        0 0 15px rgba(14, 165, 233, 0.25);
+      
+      // Efecto de brillo
+      &::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          to bottom right,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.1) 100%
+        );
+        transform: rotate(45deg);
+        transition: transform 0.6s;
+        z-index: 1;
+      }
+      
+      span, i {
+        position: relative;
+        z-index: 2;
+      }
+      
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 
+          0 10px 20px -5px rgba(0, 0, 0, 0.2),
+          0 0 20px rgba(14, 165, 233, 0.4);
+        
+        &::before {
+          transform: rotate(45deg) translateX(120%);
+        }
+        
+        i {
+          transform: translateX(-3px);
+        }
+      }
+      
+      &:active {
+        transform: translateY(0);
+      }
+    }
+    
+    &--secondary {
+      background: rgba(255, 255, 255, 0.03);
+      color: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.07);
+        border-color: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        
+        i {
+          transform: translateX(-3px);
+        }
+      }
+      
+      &:active {
+        transform: translateY(0);
+      }
+    }
+    
+    &--danger {
+      background: linear-gradient(135deg, #F87171 0%, #EF4444 100%);
+      color: white;
+      box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+        0 2px 4px -1px rgba(0, 0, 0, 0.06),
+        0 0 15px rgba(239, 68, 68, 0.25);
+      
+      // Efecto de brillo
+      &::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          to bottom right,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.1) 100%
+        );
+        transform: rotate(45deg);
+        transition: transform 0.6s;
+        z-index: 1;
+      }
+      
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 
+          0 10px 20px -5px rgba(0, 0, 0, 0.2),
+          0 0 20px rgba(239, 68, 68, 0.4);
+        
+        &::before {
+          transform: rotate(45deg) translateX(120%);
+        }
+      }
+    }
+  }
+  
+  // Animaciones mejoradas
+  @keyframes modalEnter {
+    0% {
+      opacity: 0;
+      transform: translateY(-30px) scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  @keyframes shake {
+    10%, 90% { transform: translateX(-1px); }
+    20%, 80% { transform: translateX(2px); }
+    30%, 50%, 70% { transform: translateX(-3px); }
+    40%, 60% { transform: translateX(3px); }
+  }
+  
+  @keyframes borderGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  @keyframes backgroundPulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0.6; }
+  }
+  
+  @keyframes gridMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 50px 50px; }
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }

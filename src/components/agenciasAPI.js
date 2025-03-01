@@ -1,10 +1,10 @@
 const API_URL = 'http://localhost:3002/api';
 
-export const getTherapists = async () => {
+export const getAgencias = async () => {
   try {
-    const response = await fetch(`${API_URL}/therapists`);
+    const response = await fetch(`${API_URL}/agencias`);
     if (!response.ok) {
-      throw new Error('Error al obtener los terapeutas');
+      throw new Error('Error al obtener las agencias');
     }
     return await response.json();
   } catch (error) {
@@ -13,11 +13,11 @@ export const getTherapists = async () => {
   }
 };
 
-export const getTherapistById = async (id) => {
+export const getAgenciaById = async (id) => {
   try {
-    const response = await fetch(`${API_URL}/therapists/${id}`);
+    const response = await fetch(`${API_URL}/agencias/${id}`);
     if (!response.ok) {
-      throw new Error('Error al obtener el terapeuta');
+      throw new Error('Error al obtener la agencia');
     }
     return await response.json();
   } catch (error) {
@@ -26,18 +26,18 @@ export const getTherapistById = async (id) => {
   }
 };
 
-export const createTherapist = async (therapistData) => {
+export const createAgencia = async (agenciaData) => {
   try {
-    const response = await fetch(`${API_URL}/therapists`, {
+    const response = await fetch(`${API_URL}/agencias`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(therapistData),
+      body: JSON.stringify(agenciaData),
     });
     
     if (!response.ok) {
-      throw new Error('Error al crear el terapeuta');
+      throw new Error('Error al crear la agencia');
     }
     
     return await response.json();
@@ -47,18 +47,18 @@ export const createTherapist = async (therapistData) => {
   }
 };
 
-export const updateTherapist = async (id, therapistData) => {
+export const updateAgencia = async (id, agenciaData) => {
   try {
-    const response = await fetch(`${API_URL}/therapists/${id}`, {
+    const response = await fetch(`${API_URL}/agencias/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(therapistData),
+      body: JSON.stringify(agenciaData),
     });
     
     if (!response.ok) {
-      throw new Error('Error al actualizar el terapeuta');
+      throw new Error('Error al actualizar la agencia');
     }
     
     return await response.json();
@@ -68,14 +68,14 @@ export const updateTherapist = async (id, therapistData) => {
   }
 };
 
-export const deleteTherapist = async (id) => {
+export const deleteAgencia = async (id) => {
   try {
-    const response = await fetch(`${API_URL}/therapists/${id}`, {
+    const response = await fetch(`${API_URL}/agencias/${id}`, {
       method: 'DELETE',
     });
     
     if (!response.ok) {
-      throw new Error('Error al eliminar el terapeuta');
+      throw new Error('Error al eliminar la agencia');
     }
     
     return await response.json();
