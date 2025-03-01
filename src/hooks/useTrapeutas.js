@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { getTherapists, createTherapist, updateTherapist, deleteTherapist } from '../components/servicios/therapistAPI';
+import { getTherapists, createTherapist, updateTherapist, deleteTherapist } from '../components/servicios/Ubicacion/therapistAPI';
 
 const CATEGORIES = {
   'premium': 'Premium (Verde)',
