@@ -165,5 +165,3 @@ const therapists = ${therapistsString};`;
     exportTerapeutas
   };
 };
-
-
