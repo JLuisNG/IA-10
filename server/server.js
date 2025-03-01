@@ -1,7 +1,10 @@
 const express = require('express');
 const mysql = require('mysql2/promise');
 const cors = require('cors');
+const therapistsRoutes = require('./routes/therapists'); // Asegúrate de tener este archivo o crea uno similar
+const agenciesRoutes = require('./routes/agencies'); // Nuevo archivo que creaste arriba
 require('dotenv').config();
+
 
 const app = express();
 const PORT = process.env.PORT || 3001;
