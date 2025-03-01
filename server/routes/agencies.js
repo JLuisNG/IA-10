@@ -44,7 +44,7 @@ router.get('/:id', async (req, res) => {
 // Crear una nueva agencia
 router.post('/', async (req, res) => {
   const { name, email, address, phone, status, docs, logo } = req.body;
-  
+
   try {
     const [result] = await pool.query(
       'INSERT INTO agencias (name, email, address, phone, status, docs, logo) VALUES (?, ?, ?, ?, ?, ?, ?)',

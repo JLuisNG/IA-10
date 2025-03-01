@@ -23,6 +23,7 @@ const pool = mysql.createPool({
 
 // ================ RUTAS DE TERAPEUTAS ================
 // Ruta para obtener todos los terapeutas
+
 app.get('/api/therapists', async (req, res) => {
   try {
     const [rows] = await pool.query('SELECT * FROM therapists');
@@ -165,7 +166,7 @@ app.post('/api/agencies', async (req, res) => {
   if (!name || !email) {
     return res.status(400).json({ message: 'Nombre y email son obligatorios' });
   }
-  
+
   try {
     const [result] = await pool.query(
       'INSERT INTO agencias (name, email, address, phone, status, docs, logo, patients) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
@@ -192,12 +193,12 @@ app.post('/api/agencies', async (req, res) => {
 // Actualizar una agencia existente
 app.put('/api/agencies/:id', async (req, res) => {
   const { name, email, address, phone, status, docs, logo } = req.body;
-  
+
   // Validar campos requeridos
   if (!name || !email) {
     return res.status(400).json({ message: 'Nombre y email son obligatorios' });
   }
-  
+
   try {
     // Verificar si la agencia existe
     const [agencia] = await pool.query('SELECT * FROM agencias WHERE id = ?', [req.params.id]);
@@ -205,13 +206,13 @@ app.put('/api/agencies/:id', async (req, res) => {
     if (agencia.length === 0) {
       return res.status(404).json({ message: 'Agencia no encontrada' });
     }
-    
+
     // Actualizar la agencia
     await pool.query(
       'UPDATE agencias SET name = ?, email = ?, address = ?, phone = ?, status = ?, docs = ?, logo = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?',
       [name, email, address, phone, status, docs, logo, req.params.id]
     );
-    
+
     res.json({ 
       id: parseInt(req.params.id), 
       name, 
