@@ -110,7 +110,7 @@ const Welcome = () => {
   return (
     <>
 
-      
+      <div className="container-welcome">
       {/* Pantalla de carga */}
       <div className={`loading-screen ${!loading ? 'hidden' : ''}`}>
         <div className="loading-screen__content">
@@ -312,7 +312,7 @@ const Welcome = () => {
           </div>
         </div>
       </footer>
-     
+      </div>
     </>
   );
 };

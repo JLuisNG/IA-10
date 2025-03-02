@@ -4,6 +4,7 @@ import LoginCard from './components/Login/LoginCard';
 import Welcome from './components/Welcome/Welcome';
 import UbicacionServicios from './components/servicios/Ubicacion/UbicacionServicios';
 import Agencias from './components/agencies/Agencias';
+
 // Importar FontAwesome
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
