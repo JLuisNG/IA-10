@@ -146,7 +146,7 @@ const Welcome = () => {
             <li className="header__item">
               <span 
                 className="header__link" 
-                onClick={() => navigate('/agencies')}
+                onClick={() => navigate('/agencias')}
                 style={{ cursor: 'pointer' }}
               >
                 AGENCIAS
