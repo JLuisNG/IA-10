@@ -67,6 +67,34 @@ $font-medium: 500;
 $font-semibold: 600;
 $font-bold: 700;
 
+
+$bg-dark: #1e2530;
+$bg-darker: #181d25;
+$bg-dropdown: #2a3341;
+$accent-blue: #3498db;
+$accent-blue-hover: #2980b9;
+$text-primary: #ffffff;
+$text-secondary: rgba(255, 255, 255, 0.7);
+$border-color: rgba(255, 255, 255, 0.1);
+
+$category-premium: #10b981;  // Verde
+$category-standard: #3b82f6;  // Azul
+$category-basic: #f97316;  // Naranja
+
+$status-active: #10b981;
+$status-pending: #f59e0b;
+$status-unsigned: #ef4444;
+
+$shadow-light: 0 4px 6px rgba(0, 0, 0, 0.1);
+$shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.15);
+
+$transition-quick: all 0.2s ease;
+$transition-medium: all 0.3s ease;
+
+
+
+
+
 /* =========== MIXINS REUTILIZABLES =========== */
 @mixin flex-center {
   display: flex;
