@@ -138,19 +138,19 @@ const UbicacionServicios = () => {
             <li className="header__item">
               <span 
                 className="header__link"
-                onClick={() => navigate('/pacientes')}
+                onClick={() => navigate('/referrals')}
                 style={{ cursor: 'pointer' }}
               >
-                PACIENTES
+                REFERRALS NEWS
               </span>
             </li>
             <li className="header__item">
               <span 
                 className="header__link"
-                onClick={() => navigate('/referrals')}
+                onClick={() => navigate('/pacientes')}
                 style={{ cursor: 'pointer' }}
               >
-                REFERRALS
+                PACIENTES
               </span>
             </li>
             <li className="header__item">

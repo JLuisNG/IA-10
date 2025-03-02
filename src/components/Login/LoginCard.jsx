@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Login from './Login';
 import PasswordRecovery from './PasswordRecovery';
-import Contact from './Contact';
 import '../../styles/Login.scss';
 import backgroundImg from '../../images/LosAngelesCity.jpg';
 
@@ -69,13 +68,7 @@ const LoginCard = () => {
           </div>
           
           {/* Parte trasera para contacto */}
-          <div 
-            className="login-card__back" 
-            id="contactCard" 
-            style={{ display: activeCard === 'contact' ? 'block' : 'none' }}
-          >
-            <Contact onBackToLogin={handleBackToLogin} />
-          </div>
+
         </div>
       </div>
     </div>
