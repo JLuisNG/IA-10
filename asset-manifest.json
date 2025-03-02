@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/IA-10/static/css/main.3dd68b8a.css",
-    "main.js": "/IA-10/static/js/main.56fbf605.js",
+    "main.css": "/IA-10/static/css/main.6d1cba69.css",
+    "main.js": "/IA-10/static/js/main.40dcfbeb.js",
+    "static/media/Oceanside.jpg": "/IA-10/static/media/Oceanside.6ab81bfe75f8157bc29f.jpg",
     "static/media/Observatorio.jpg": "/IA-10/static/media/Observatorio.f60afb335ed037c4dd34.jpg",
     "static/media/LosAngelesCity.jpg": "/IA-10/static/media/LosAngelesCity.f47a3fee6871446c9cde.jpg",
-    "static/media/CityLocation.jpg": "/IA-10/static/media/CityLocation.7cbfc4d2ae41c8433be5.jpg",
     "static/media/fa-solid-900.ttf": "/IA-10/static/media/fa-solid-900.2582b0e4bcf85eceead0.ttf",
     "static/media/32A90059-EE8B-4689-A398-D08AC03A1AC6.jpeg": "/IA-10/static/media/32A90059-EE8B-4689-A398-D08AC03A1AC6.421258215070fc96d2b4.jpeg",
     "static/media/fa-brands-400.ttf": "/IA-10/static/media/fa-brands-400.1815e00441357e01619e.ttf",
@@ -15,11 +15,11 @@
     "static/media/fa-v4compatibility.ttf": "/IA-10/static/media/fa-v4compatibility.da94ef451f4969af06e6.ttf",
     "static/media/fa-v4compatibility.woff2": "/IA-10/static/media/fa-v4compatibility.ea8f94e1d22e0d35ccd4.woff2",
     "index.html": "/IA-10/index.html",
-    "main.3dd68b8a.css.map": "/IA-10/static/css/main.3dd68b8a.css.map",
-    "main.56fbf605.js.map": "/IA-10/static/js/main.56fbf605.js.map"
+    "main.6d1cba69.css.map": "/IA-10/static/css/main.6d1cba69.css.map",
+    "main.40dcfbeb.js.map": "/IA-10/static/js/main.40dcfbeb.js.map"
   },
   "entrypoints": [
-    "static/css/main.3dd68b8a.css",
-    "static/js/main.56fbf605.js"
+    "static/css/main.6d1cba69.css",
+    "static/js/main.40dcfbeb.js"
   ]
 }
