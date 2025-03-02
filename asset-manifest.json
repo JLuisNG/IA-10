@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/IA-10/static/css/main.557db53b.css",
-    "main.js": "/IA-10/static/js/main.56dd1c34.js",
+    "main.css": "/IA-10/static/css/main.3dd68b8a.css",
+    "main.js": "/IA-10/static/js/main.56fbf605.js",
     "static/media/Observatorio.jpg": "/IA-10/static/media/Observatorio.f60afb335ed037c4dd34.jpg",
     "static/media/LosAngelesCity.jpg": "/IA-10/static/media/LosAngelesCity.f47a3fee6871446c9cde.jpg",
     "static/media/CityLocation.jpg": "/IA-10/static/media/CityLocation.7cbfc4d2ae41c8433be5.jpg",
@@ -15,11 +15,11 @@
     "static/media/fa-v4compatibility.ttf": "/IA-10/static/media/fa-v4compatibility.da94ef451f4969af06e6.ttf",
     "static/media/fa-v4compatibility.woff2": "/IA-10/static/media/fa-v4compatibility.ea8f94e1d22e0d35ccd4.woff2",
     "index.html": "/IA-10/index.html",
-    "main.557db53b.css.map": "/IA-10/static/css/main.557db53b.css.map",
-    "main.56dd1c34.js.map": "/IA-10/static/js/main.56dd1c34.js.map"
+    "main.3dd68b8a.css.map": "/IA-10/static/css/main.3dd68b8a.css.map",
+    "main.56fbf605.js.map": "/IA-10/static/js/main.56fbf605.js.map"
   },
   "entrypoints": [
-    "static/css/main.557db53b.css",
-    "static/js/main.56dd1c34.js"
+    "static/css/main.3dd68b8a.css",
+    "static/js/main.56fbf605.js"
   ]
 }
