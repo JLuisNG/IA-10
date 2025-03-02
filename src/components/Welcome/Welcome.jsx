@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import '../../styles/Welcome.scss';
 import logoImg from '../../images/32A90059-EE8B-4689-A398-D08AC03A1AC6.jpeg';
 
-
 const Welcome = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
