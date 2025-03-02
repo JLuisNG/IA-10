@@ -1,14 +1,7 @@
 const express = require('express');
+const router = express.Router();
 const mysql = require('mysql2/promise');
-const cors = require('cors');
 require('dotenv').config();
-
-const app = express();
-const PORT = process.env.PORT || 3001;
-
-// Middleware
-app.use(cors());
-app.use(express.json());
 
 // Configuración de la conexión a MySQL
 const pool = mysql.createPool({
@@ -21,116 +14,8 @@ const pool = mysql.createPool({
   queueLimit: 0
 });
 
-// Ruta para obtener todos los terapeutas
-app.get('/api/therapists', async (req, res) => {
-  try {
-    const [rows] = await pool.query('SELECT * FROM therapists');
-    res.json(rows);
-  } catch (error) {
-    console.error('Error al obtener terapeutas:', error);
-    res.status(500).json({ error: 'Error al obtener los datos' });
-  }
-});
-
-// Ruta para obtener un terapeuta específico
-app.get('/api/therapists/:id', async (req, res) => {
-  try {
-    const [rows] = await pool.query('SELECT * FROM therapists WHERE id = ?', [req.params.id]);
-    if (rows.length === 0) {
-      return res.status(404).json({ error: 'Terapeuta no encontrado' });
-    }
-    res.json(rows[0]);
-  } catch (error) {
-    console.error('Error al obtener terapeuta:', error);
-    res.status(500).json({ error: 'Error al obtener los datos' });
-  }
-});
-
-// Ruta para crear un nuevo terapeuta
-app.post('/api/therapists', async (req, res) => {
-  const { name, type, category, areas, languages, phone, email, status } = req.body;
-  
-  if (!name || !type || !category) {
-    return res.status(400).json({ error: 'Los campos nombre, tipo y categoría son obligatorios' });
-  }
-  
-  try {
-    const [result] = await pool.query(
-      'INSERT INTO therapists (name, type, category, areas, languages, phone, email, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-      [name, type, category, areas, languages, phone, email, status]
-    );
-    
-    res.status(201).json({ 
-      id: result.insertId, 
-      name, 
-      type, 
-      category, 
-      areas, 
-      languages, 
-      phone, 
-      email, 
-      status 
-    });
-  } catch (error) {
-    console.error('Error al crear terapeuta:', error);
-    res.status(500).json({ error: 'Error al guardar los datos' });
-  }
-});
-
-// Ruta para actualizar un terapeuta
-app.put('/api/therapists/:id', async (req, res) => {
-  const { name, type, category, areas, languages, phone, email, status } = req.body;
-  
-  if (!name || !type || !category) {
-    return res.status(400).json({ error: 'Los campos nombre, tipo y categoría son obligatorios' });
-  }
-  
-  try {
-    const [result] = await pool.query(
-      'UPDATE therapists SET name = ?, type = ?, category = ?, areas = ?, languages = ?, phone = ?, email = ?, status = ? WHERE id = ?',
-      [name, type, category, areas, languages, phone, email, status, req.params.id]
-    );
-    
-    if (result.affectedRows === 0) {
-      return res.status(404).json({ error: 'Terapeuta no encontrado' });
-    }
-    
-    res.json({ 
-      id: req.params.id, 
-      name, 
-      type, 
-      category, 
-      areas, 
-      languages, 
-      phone, 
-      email, 
-      status 
-    });
-  } catch (error) {
-    console.error('Error al actualizar terapeuta:', error);
-    res.status(500).json({ error: 'Error al actualizar los datos' });
-  }
-});
-
-// Ruta para eliminar un terapeuta
-app.delete('/api/therapists/:id', async (req, res) => {
-  try {
-    const [result] = await pool.query('DELETE FROM therapists WHERE id = ?', [req.params.id]);
-    
-    if (result.affectedRows === 0) {
-      return res.status(404).json({ error: 'Terapeuta no encontrado' });
-    }
-    
-    res.json({ message: 'Terapeuta eliminado correctamente' });
-  } catch (error) {
-    console.error('Error al eliminar terapeuta:', error);
-    res.status(500).json({ error: 'Error al eliminar los datos' });
-  }
-});
-
-// NUEVAS RUTAS PARA AGENCIAS
 // Obtener todas las agencias
-app.get('/api/agencias', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const [rows] = await pool.query('SELECT * FROM agencias ORDER BY name ASC');
     res.json(rows);
@@ -141,7 +26,7 @@ app.get('/api/agencias', async (req, res) => {
 });
 
 // Buscar agencias por nombre
-app.get('/api/agencias/search', async (req, res) => {
+router.get('/search', async (req, res) => {
   const searchTerm = req.query.term || '';
   
   try {
@@ -157,7 +42,7 @@ app.get('/api/agencias/search', async (req, res) => {
 });
 
 // Obtener una agencia específica
-app.get('/api/agencias/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const [rows] = await pool.query('SELECT * FROM agencias WHERE id = ?', [req.params.id]);
     if (rows.length === 0) {
@@ -171,7 +56,7 @@ app.get('/api/agencias/:id', async (req, res) => {
 });
 
 // Crear una nueva agencia
-app.post('/api/agencias', async (req, res) => {
+router.post('/', async (req, res) => {
   const { name, email, address, phone, status, docs, logo, patients } = req.body;
   
   if (!name) {
@@ -202,7 +87,7 @@ app.post('/api/agencias', async (req, res) => {
 });
 
 // Actualizar una agencia
-app.put('/api/agencias/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
   const { name, email, address, phone, status, docs, logo, patients } = req.body;
   
   if (!name) {
@@ -237,7 +122,7 @@ app.put('/api/agencias/:id', async (req, res) => {
 });
 
 // Eliminar una agencia
-app.delete('/api/agencias/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     // Simulamos un retraso para mostrar la animación de carga en el frontend
     await new Promise(resolve => setTimeout(resolve, 1000));
@@ -255,7 +140,4 @@ app.delete('/api/agencias/:id', async (req, res) => {
   }
 });
 
-// Iniciar el servidor
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en el puerto ${PORT}`);
-});
+module.exports = router;
