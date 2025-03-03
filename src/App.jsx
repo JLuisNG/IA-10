@@ -16,11 +16,11 @@ function App() {
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/ubicacion" element={<UbicacionServicios />} />
         <Route path="/agencias" element={<Agencias />} />
+        <Route path="/frecuencias" element={<Welcome />} />
         <Route path="/therapy-sync" element={<Welcome />} />
         <Route path="/soporte" element={<Welcome />} />
+        
         {/* Rutas adicionales para las acciones rápidas */}
-        <Route path="/nuevo-caso" element={<Welcome />} />
-        <Route path="/asignar-terapeuta" element={<Welcome />} />
         <Route path="/reportes" element={<Welcome />} />
       </Routes>
     </HashRouter>
@@ -28,4 +28,3 @@ function App() {
 }
 
 export default App;
-
