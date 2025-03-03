@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/IA-10/static/css/main.6d1cba69.css",
-    "main.js": "/IA-10/static/js/main.40dcfbeb.js",
+    "main.js": "/IA-10/static/js/main.e1225988.js",
     "static/media/Oceanside.jpg": "/IA-10/static/media/Oceanside.6ab81bfe75f8157bc29f.jpg",
     "static/media/Observatorio.jpg": "/IA-10/static/media/Observatorio.f60afb335ed037c4dd34.jpg",
     "static/media/LosAngelesCity.jpg": "/IA-10/static/media/LosAngelesCity.f47a3fee6871446c9cde.jpg",
@@ -16,10 +16,10 @@
     "static/media/fa-v4compatibility.woff2": "/IA-10/static/media/fa-v4compatibility.ea8f94e1d22e0d35ccd4.woff2",
     "index.html": "/IA-10/index.html",
     "main.6d1cba69.css.map": "/IA-10/static/css/main.6d1cba69.css.map",
-    "main.40dcfbeb.js.map": "/IA-10/static/js/main.40dcfbeb.js.map"
+    "main.e1225988.js.map": "/IA-10/static/js/main.e1225988.js.map"
   },
   "entrypoints": [
     "static/css/main.6d1cba69.css",
-    "static/js/main.40dcfbeb.js"
+    "static/js/main.e1225988.js"
   ]
 }
