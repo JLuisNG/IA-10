@@ -138,7 +138,7 @@ const Welcome = () => {
             <li className="header__item">
               <span 
                 className="header__link" 
-                onClick={() => navigate('/therapy-sync')}
+                onClick={() => navigate('/tSync')}
                 style={{ cursor: 'pointer' }}
               >
                 THERAPY SYNC

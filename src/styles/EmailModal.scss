@@ -1,0 +1,925 @@
+// Variables
+$primary-color: #2c80dc;
+$primary-dark: #1c5da0;
+$secondary-color: #34495e;
+$accent-color: #00bcd4;
+$success-color: #27ae60;
+$warning-color: #f39c12;
+$danger-color: #e74c3c;
+$light-color: #ecf0f1;
+$text-color: #2c3e50;
+$border-radius: 8px;
+$shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+$shadow-md: 0 4px 8px rgba(0,0,0,0.15);
+$shadow-lg: 0 8px 16px rgba(0,0,0,0.3);
+
+// Mixins
+@mixin transition($property: all, $duration: 0.3s, $timing: ease) {
+  transition: $property $duration $timing;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Animations
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+// Main Email Modal Styles
+.email-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  @include flex-center;
+  opacity: 0;
+  visibility: hidden;
+  @include transition;
+  backdrop-filter: blur(5px);
+  
+  &.show {
+    opacity: 1;
+    visibility: visible;
+    
+    .email-modal {
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  .email-modal {
+    width: 90%;
+    max-width: 1200px;
+    height: 85vh;
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: $shadow-lg;
+    transform: translateY(30px) scale(0.98);
+    @include transition(transform, 0.5s, cubic-bezier(0.19, 1, 0.22, 1));
+    background: linear-gradient(to right, #f8f9fa, #e9ecef);
+    
+    // Header Section
+    .email-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      background: linear-gradient(to right, $primary-dark, $primary-color);
+      color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      
+      h2 {
+        margin: 0;
+        font-size: 1.4rem;
+        font-weight: 600;
+      }
+      
+      .tabs {
+        display: flex;
+        gap: 0.5rem;
+        
+        .tab {
+          background: none;
+          border: none;
+          color: rgba(255, 255, 255, 0.7);
+          padding: 0.6rem 1.2rem;
+          border-radius: 30px;
+          cursor: pointer;
+          font-size: 0.9rem;
+          font-weight: 500;
+          @include transition;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+          }
+          
+          &.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-weight: 600;
+          }
+          
+          i {
+            font-size: 0.9rem;
+          }
+        }
+      }
+      
+      .close-button {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        @include flex-center;
+        cursor: pointer;
+        
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+      }
+    }
+    
+    // Email Modal Content
+    .email-modal-content {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      
+      // Original Email View
+      .original-email {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        animation: fadeIn 0.5s;
+        
+        .email-header {
+          padding: 1rem 1.5rem;
+          background-color: #f5f7fa;
+          border-bottom: 1px solid #e5e9f0;
+          
+          .email-field {
+            display: flex;
+            margin-bottom: 0.5rem;
+            
+            &:last-child {
+              margin-bottom: 0;
+            }
+            
+            .label {
+              font-weight: 600;
+              width: 80px;
+              color: $secondary-color;
+            }
+            
+            .value {
+              color: $text-color;
+            }
+          }
+        }
+        
+        .email-body {
+          flex: 1;
+          overflow-y: auto;
+          padding: 2rem;
+          
+          .email-content {
+            h3 {
+              color: $secondary-color;
+              font-size: 1.2rem;
+              margin-bottom: 1rem;
+              border-bottom: 1px solid #e5e9f0;
+              padding-bottom: 0.5rem;
+            }
+            
+            .patient-info-card {
+              background-color: #f8f9fa;
+              border: 1px solid #e5e9f0;
+              border-radius: $border-radius;
+              padding: 1.5rem;
+              margin-bottom: 2rem;
+              display: grid;
+              grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+              gap: 1.5rem;
+              box-shadow: $shadow-sm;
+              
+              .patient-info-item {
+                display: flex;
+                align-items: flex-start;
+                gap: 1rem;
+                
+                i {
+                  color: $primary-color;
+                  font-size: 1.2rem;
+                  margin-top: 0.2rem;
+                }
+                
+                div {
+                  flex: 1;
+                  
+                  label {
+                    display: block;
+                    font-weight: 600;
+                    font-size: 0.9rem;
+                    margin-bottom: 0.3rem;
+                    color: $secondary-color;
+                  }
+                  
+                  span {
+                    color: $text-color;
+                    line-height: 1.4;
+                  }
+                }
+              }
+            }
+            
+            .notas-correo {
+              background-color: #f8f9fa;
+              border: 1px solid #e5e9f0;
+              border-radius: $border-radius;
+              padding: 1.5rem;
+              color: $text-color;
+              white-space: pre-wrap;
+              font-family: inherit;
+              line-height: 1.5;
+              max-height: 200px;
+              overflow-y: auto;
+              box-shadow: $shadow-sm;
+            }
+          }
+          
+          .email-actions {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            
+            .action-button {
+              padding: 0.8rem 1.2rem;
+              border-radius: 30px;
+              font-weight: 600;
+              cursor: pointer;
+              font-size: 0.9rem;
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+              @include transition;
+              
+              i {
+                font-size: 1rem;
+              }
+              
+              &.secondary {
+                background-color: #edf2f7;
+                color: $secondary-color;
+                border: 1px solid #e2e8f0;
+                
+                &:hover {
+                  background-color: #e2e8f0;
+                }
+              }
+              
+              &:not(.secondary) {
+                background-color: $primary-color;
+                color: white;
+                border: none;
+                
+                &:hover {
+                  background-color: $primary-dark;
+                }
+              }
+            }
+          }
+        }
+      }
+      
+      // Reply Email View
+      .responder-email {
+        height: 100%;
+        animation: fadeIn 0.5s;
+        
+        .email-layout {
+          display: flex;
+          height: 100%;
+          
+          // Templates Section
+          .plantillas-section {
+            width: 280px;
+            background-color: #f8f9fa;
+            border-right: 1px solid #e5e9f0;
+            overflow-y: auto;
+            
+            h3 {
+              padding: 1rem 1rem 0.5rem;
+              margin: 0;
+              font-size: 1rem;
+              color: $secondary-color;
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+              border-bottom: 1px solid #e5e9f0;
+              
+              i {
+                color: $primary-color;
+              }
+            }
+            
+            .loading-plantillas {
+              padding: 2rem 0;
+              @include flex-center;
+              flex-direction: column;
+              gap: 1rem;
+              
+              .loading-spinner {
+                width: 30px;
+                height: 30px;
+                border: 3px solid rgba(0, 0, 0, 0.1);
+                border-radius: 50%;
+                border-top-color: $primary-color;
+                animation: rotate 1s linear infinite;
+              }
+            }
+            
+            .plantillas-list {
+              padding: 0.5rem;
+              display: flex;
+              flex-direction: column;
+              gap: 0.5rem;
+              
+              .plantilla-item {
+                padding: 1rem;
+                background-color: white;
+                border: 1px solid #e5e9f0;
+                border-radius: $border-radius;
+                cursor: pointer;
+                @include transition;
+                
+                &:hover {
+                  box-shadow: $shadow-sm;
+                  border-color: #cbd5e0;
+                }
+                
+                &.selected {
+                  border-color: $primary-color;
+                  background-color: rgba($primary-color, 0.05);
+                  box-shadow: $shadow-sm;
+                }
+                
+                .plantilla-title {
+                  font-weight: 600;
+                  color: $secondary-color;
+                  margin-bottom: 0.5rem;
+                  display: flex;
+                  align-items: center;
+                  gap: 0.5rem;
+                  
+                  i {
+                    color: $primary-color;
+                    font-size: 0.9rem;
+                  }
+                }
+                
+                .plantilla-preview {
+                  font-size: 0.85rem;
+                  color: #718096;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  display: -webkit-box;
+                  -webkit-line-clamp: 2;
+                  -webkit-box-orient: vertical;
+                }
+                
+                &.custom {
+                  border-style: dashed;
+                  
+                  &:not(.selected) {
+                    background-color: #f8f9fa;
+                  }
+                  
+                  .plantilla-title i {
+                    color: $accent-color;
+                  }
+                }
+              }
+            }
+          }
+          
+          // Email Composer Section
+          .composer-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            
+            // Recipients Container
+            .recipients-container {
+              padding: 1rem;
+              background-color: #f8f9fa;
+              border-bottom: 1px solid #e5e9f0;
+              
+              .recipients-field {
+                display: flex;
+                margin-bottom: 0.8rem;
+                
+                .field-label {
+                  width: 60px;
+                  font-weight: 600;
+                  color: $secondary-color;
+                  padding-top: 0.5rem;
+                }
+                
+                .recipients-list {
+                  flex: 1;
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: 0.5rem;
+                  align-items: center;
+                  min-height: 36px;
+                  
+                  .recipient-tag {
+                    display: flex;
+                    align-items: center;
+                    background-color: #edf2f7;
+                    border-radius: 16px;
+                    padding: 0.2rem 0.5rem 0.2rem 0.8rem;
+                    
+                    span {
+                      font-size: 0.9rem;
+                      color: $text-color;
+                    }
+                    
+                    button {
+                      background: none;
+                      border: none;
+                      padding: 0 0 0 0.3rem;
+                      cursor: pointer;
+                      font-size: 0.8rem;
+                      color: #a0aec0;
+                      
+                      &:hover {
+                        color: $danger-color;
+                      }
+                    }
+                  }
+                  
+                  .recipient-input-container {
+                    flex: 1;
+                    min-width: 120px;
+                    
+                    input {
+                      width: 100%;
+                      border: none;
+                      padding: 0.5rem 0;
+                      font-size: 0.95rem;
+                      background: transparent;
+                      color: $text-color;
+                      
+                      &:focus {
+                        outline: none;
+                      }
+                      
+                      &::placeholder {
+                        color: #a0aec0;
+                      }
+                    }
+                  }
+                }
+                
+                .recipients-actions {
+                  position: relative;
+                  
+                  .add-cc-btn {
+                    background: none;
+                    border: none;
+                    color: $primary-color;
+                    font-size: 0.9rem;
+                    cursor: pointer;
+                    padding: 0.5rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.3rem;
+                    
+                    &:hover {
+                      text-decoration: underline;
+                    }
+                  }
+                  
+                  .recipients-dropdown {
+                    position: absolute;
+                    top: 100%;
+                    right: 0;
+                    width: 350px;
+                    background-color: white;
+                    border-radius: $border-radius;
+                    box-shadow: $shadow-md;
+                    border: 1px solid #e5e9f0;
+                    padding: 1rem;
+                    z-index: 10;
+                    
+                    .cc-section, .bcc-section {
+                      margin-bottom: 1rem;
+                      
+                      &:last-child {
+                        margin-bottom: 0;
+                      }
+                    }
+                  }
+                }
+              }
+              
+              .subject-field {
+                display: flex;
+                
+                .field-label {
+                  width: 60px;
+                  font-weight: 600;
+                  color: $secondary-color;
+                  padding-top: 0.5rem;
+                }
+                
+                input {
+                  flex: 1;
+                  padding: 0.5rem;
+                  border: 1px solid #e5e9f0;
+                  border-radius: $border-radius;
+                  font-size: 0.95rem;
+                  color: $text-color;
+                  
+                  &:focus {
+                    outline: none;
+                    border-color: $primary-color;
+                    box-shadow: 0 0 0 2px rgba($primary-color, 0.1);
+                  }
+                }
+              }
+            }
+            
+            // Editor Toolbar
+            .editor-toolbar {
+              display: flex;
+              align-items: center;
+              padding: 0.5rem;
+              background-color: #f8f9fa;
+              border-bottom: 1px solid #e5e9f0;
+              flex-wrap: wrap;
+              gap: 0.3rem;
+              
+              .toolbar-group {
+                display: flex;
+                align-items: center;
+                padding: 0 0.5rem;
+                
+                &:not(:last-child) {
+                  border-right: 1px solid #e5e9f0;
+                }
+              }
+              
+              .toolbar-button {
+                background: none;
+                border: none;
+                width: 32px;
+                height: 32px;
+                @include flex-center;
+                border-radius: 4px;
+                cursor: pointer;
+                color: $secondary-color;
+                
+                &:hover {
+                  background-color: #edf2f7;
+                }
+                
+                &.active {
+                  background-color: rgba($primary-color, 0.1);
+                  color: $primary-color;
+                }
+              }
+              
+              .toolbar-select {
+                padding: 0.3rem 0.5rem;
+                border: 1px solid #e5e9f0;
+                border-radius: 4px;
+                background-color: white;
+                color: $text-color;
+                font-size: 0.9rem;
+                cursor: pointer;
+                
+                &:focus {
+                  outline: none;
+                  border-color: $primary-color;
+                }
+              }
+              
+              .toolbar-dropdown-container {
+                position: relative;
+                
+                .toolbar-button {
+                  width: auto;
+                  padding: 0 0.8rem;
+                  gap: 0.3rem;
+                }
+                
+                .toolbar-dropdown {
+                  position: absolute;
+                  top: 100%;
+                  left: 0;
+                  background-color: white;
+                  border-radius: $border-radius;
+                  box-shadow: $shadow-md;
+                  border: 1px solid #e5e9f0;
+                  min-width: 200px;
+                  padding: 0.5rem;
+                  z-index: 10;
+                  margin-top: 0.3rem;
+                  
+                  button {
+                    width: 100%;
+                    text-align: left;
+                    padding: 0.5rem 0.8rem;
+                    background: none;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    color: $text-color;
+                    font-size: 0.9rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    
+                    &:hover {
+                      background-color: #f7fafc;
+                    }
+                    
+                    i {
+                      color: $primary-color;
+                      width: 16px;
+                    }
+                  }
+                }
+              }
+            }
+            
+            // Editor Container
+            .editor-container, .preview-container {
+              flex: 1;
+              overflow-y: auto;
+              padding: 1.5rem;
+              
+              .rich-text-editor, .preview-content {
+                min-height: 300px;
+                outline: none;
+                color: $text-color;
+                line-height: 1.6;
+                font-size: 0.95rem;
+                
+                .data-tag {
+                  display: inline-block;
+                  background-color: rgba($primary-color, 0.1);
+                  color: $primary-color;
+                  padding: 0.1rem 0.3rem;
+                  border-radius: 3px;
+                  font-size: 0.85rem;
+                  font-weight: 600;
+                  margin: 0 2px;
+                }
+              }
+            }
+            
+            // Attachments Container
+            .attachments-container {
+              padding: 0.8rem 1rem;
+              background-color: #f8f9fa;
+              border-top: 1px solid #e5e9f0;
+              
+              h4 {
+                margin: 0 0 0.8rem;
+                font-size: 1rem;
+                color: $secondary-color;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                
+                i {
+                  color: $primary-color;
+                }
+              }
+              
+              .attachments-list {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.8rem;
+                
+                .attachment-item {
+                  display: flex;
+                  align-items: center;
+                  padding: 0.5rem 0.8rem;
+                  background-color: #edf2f7;
+                  border: 1px solid #e2e8f0;
+                  border-radius: 4px;
+                  gap: 0.8rem;
+                  max-width: 250px;
+                  
+                  .attachment-icon {
+                    color: $primary-color;
+                    font-size: 1.2rem;
+                  }
+                  
+                  .attachment-details {
+                    flex: 1;
+                    min-width: 0;
+                    
+                    .attachment-name {
+                      display: block;
+                      font-size: 0.9rem;
+                      font-weight: 600;
+                      color: $text-color;
+                      white-space: nowrap;
+                      overflow: hidden;
+                      text-overflow: ellipsis;
+                    }
+                    
+                    .attachment-size {
+                      display: block;
+                      font-size: 0.8rem;
+                      color: #718096;
+                    }
+                  }
+                  
+                  .attachment-remove {
+                    background: none;
+                    border: none;
+                    color: #a0aec0;
+                    cursor: pointer;
+                    font-size: 0.9rem;
+                    width: 24px;
+                    height: 24px;
+                    @include flex-center;
+                    border-radius: 50%;
+                    
+                    &:hover {
+                      color: $danger-color;
+                      background-color: rgba($danger-color, 0.1);
+                    }
+                  }
+                }
+              }
+            }
+            
+            // Composer Actions
+            .composer-actions {
+              padding: 1rem;
+              background-color: #f8f9fa;
+              border-top: 1px solid #e5e9f0;
+              display: flex;
+              justify-content: flex-end;
+              gap: 1rem;
+              
+              .action-button {
+                padding: 0.7rem 1.2rem;
+                border-radius: 30px;
+                font-weight: 600;
+                cursor: pointer;
+                font-size: 0.9rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                @include transition;
+                
+                i {
+                  font-size: 0.9rem;
+                }
+                
+                &.outline {
+                  background: none;
+                  border: 1px solid $primary-color;
+                  color: $primary-color;
+                  
+                  &:hover {
+                    background-color: rgba($primary-color, 0.05);
+                  }
+                }
+                
+                &.secondary {
+                  background-color: #edf2f7;
+                  color: $secondary-color;
+                  border: 1px solid #e2e8f0;
+                  
+                  &:hover {
+                    background-color: #e2e8f0;
+                  }
+                }
+                
+                &.primary {
+                  background: linear-gradient(to right, $primary-color, $accent-color);
+                  color: white;
+                  border: none;
+                  box-shadow: $shadow-sm;
+                  
+                  &:hover {
+                    background: linear-gradient(to right, $accent-color, $primary-color);
+                    transform: translateY(-2px);
+                    box-shadow: $shadow-md;
+                  }
+                  
+                  &:disabled {
+                    background: #a0aec0;
+                    cursor: not-allowed;
+                    transform: none;
+                    box-shadow: none;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Media Queries
+@media (max-width: 992px) {
+  .email-modal-overlay .email-modal {
+    width: 95%;
+    height: 90vh;
+    
+    .email-modal-content .responder-email .email-layout {
+      flex-direction: column;
+      
+      .plantillas-section {
+        width: 100%;
+        height: 200px;
+        border-right: none;
+        border-bottom: 1px solid #e5e9f0;
+        
+        .plantillas-list {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .email-modal-overlay .email-modal {
+    .email-modal-header {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+      
+      .tabs {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+    
+    .email-modal-content {
+      .original-email .email-body .patient-info-card {
+        grid-template-columns: 1fr;
+      }
+      
+      .responder-email {
+        .recipients-container {
+          .recipients-field, .subject-field {
+            flex-direction: column;
+            
+            .field-label {
+              width: auto;
+              padding: 0 0 0.3rem;
+            }
+          }
+        }
+        
+        .editor-toolbar {
+          overflow-x: auto;
+          justify-content: flex-start;
+          padding: 0.5rem;
+          
+          .toolbar-group {
+            padding: 0 0.3rem;
+          }
+        }
+        
+        .composer-actions {
+          flex-wrap: wrap;
+          
+          .action-button {
+            flex: 1;
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
+}

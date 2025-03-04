@@ -1,0 +1,844 @@
+@import './variables';
+
+// Animaciones
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 5px rgba(var(--glow-color), 0.5); }
+  50% { box-shadow: 0 0 20px rgba(var(--glow-color), 0.8); }
+  100% { box-shadow: 0 0 5px rgba(var(--glow-color), 0.5); }
+}
+
+.pacientes-container {
+  min-height: calc(100vh - 160px);
+  padding: 1.5rem;
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), url('../images/Bosque.jpeg') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  animation: fadeIn 0.8s ease-out;
+  color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+}
+
+.pacientes-header {
+  margin-bottom: 1.5rem;
+
+  .pacientes-title {
+    font-size: 2rem;
+    margin: 0 0 1rem 0;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .pacientes-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 1rem;
+    
+    .search-box {
+      position: relative;
+      flex-grow: 1;
+      max-width: 400px;
+      
+      input {
+        width: 100%;
+        padding: 0.8rem 1rem 0.8rem 2.5rem;
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+        color: white;
+        font-size: 1rem;
+        
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.6);
+        }
+        
+        &:focus {
+          outline: none;
+          background-color: rgba(255, 255, 255, 0.15);
+          border-color: rgba(255, 255, 255, 0.3);
+          box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+        }
+      }
+      
+      i {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+    
+    .filter-group {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      
+      .filter-select {
+        padding: 0.6rem 1rem;
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+        color: white;
+        cursor: pointer;
+        min-width: 180px;
+        
+        option {
+          background-color: #212130;
+          color: white;
+        }
+        
+        &:focus {
+          outline: none;
+          background-color: rgba(255, 255, 255, 0.15);
+          border-color: rgba(255, 255, 255, 0.3);
+          box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+        }
+      }
+    }
+    
+    .legend-toggle {
+      position: relative;
+      
+      .legend-button {
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 0.6rem 1rem;
+        border-radius: 4px;
+        color: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.15);
+        }
+        
+        i {
+          font-size: 1rem;
+        }
+      }
+      
+      .estados-legend {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        margin-top: 0.5rem;
+        background-color: rgba(33, 33, 48, 0.95);
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        padding: 1rem;
+        z-index: 100;
+        min-width: 220px;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        
+        &:before {
+          content: '';
+          position: absolute;
+          top: -6px;
+          right: 30px;
+          width: 12px;
+          height: 12px;
+          background-color: rgba(33, 33, 48, 0.95);
+          transform: rotate(45deg);
+          border-left: 1px solid rgba(255, 255, 255, 0.1);
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .legend-title {
+          font-weight: 600;
+          margin-bottom: 0.8rem;
+          color: white;
+          padding-bottom: 0.5rem;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .legend-items {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          
+          .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            
+            .legend-color {
+              width: 16px;
+              height: 16px;
+              border-radius: 3px;
+            }
+            
+            .legend-label {
+              font-size: 0.9rem;
+              color: white;
+            }
+          }
+        }
+      }
+      
+      &:hover .estados-legend {
+        opacity: 1;
+        pointer-events: all;
+      }
+    }
+  }
+}
+
+.pacientes-table-container {
+  flex-grow: 1;
+  background-color: rgba(25, 25, 35, 0.8);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+  animation: slideInUp 0.6s ease-out;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  
+  .pacientes-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #f0f0f0;
+    
+    th, td {
+      padding: 0.8rem 1rem;
+      text-align: left;
+      vertical-align: middle;
+      
+      &.estado-column {
+        width: 140px;
+      }
+      
+      &.disciplinas-container {
+        width: 380px;
+      }
+      
+      &.notas-column {
+        width: 200px;
+      }
+    }
+    
+    th {
+      background-color: rgba(20, 20, 30, 0.8);
+      font-weight: 600;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid rgba(56, 218, 255, 0.3);
+    }
+    
+    tbody tr {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: background-color 0.2s ease;
+      
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+      
+      &:last-child {
+        border-bottom: none;
+      }
+      
+      &.no-asistido {
+        background-color: rgba(30, 30, 30, 0.5);
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+    
+    .no-results {
+      text-align: center;
+      padding: 2rem;
+      color: #999;
+      font-style: italic;
+    }
+  }
+}
+
+.paciente-row {
+  position: relative;
+  
+  .cell-content {
+    cursor: pointer;
+    padding: 0.3rem 0;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+    
+    &:hover {
+      background-color: rgba(56, 218, 255, 0.1);
+    }
+    
+    .empty-cell {
+      color: #777;
+      font-style: italic;
+    }
+    
+    &.agency-cell {
+      font-weight: 500;
+      color: #ffcc80;
+    }
+  }
+  
+  .editable-cell-input {
+    width: 100%;
+    background-color: rgba(20, 20, 30, 0.8);
+    border: 1px solid rgba(56, 218, 255, 0.5);
+    padding: 0.5rem 0.8rem;
+    color: white;
+    font-size: 1rem;
+    border-radius: 4px;
+    
+    &:focus {
+      outline: none;
+      border-color: rgba(56, 218, 255, 0.8);
+      box-shadow: 0 0 0 2px rgba(56, 218, 255, 0.2);
+    }
+  }
+  
+  .nota-importante {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    background-color: rgba(255, 71, 87, 0.1);
+    padding: 0.6rem;
+    border-radius: 4px;
+    border-left: 3px solid rgba(255, 71, 87, 0.8);
+    
+    i {
+      color: rgba(255, 71, 87, 0.8);
+      font-size: 1rem;
+      margin-top: 0.2rem;
+    }
+    
+    .nota-texto {
+      font-size: 0.9rem;
+      line-height: 1.4;
+      flex: 1;
+    }
+  }
+  
+  .estado-cell {
+    position: relative;
+    
+    .estado-actual {
+      padding: 0.6rem 0.8rem;
+      border-radius: 4px;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+        filter: brightness(1.1);
+      }
+    }
+    
+    .estado-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin-top: 0.5rem;
+      background-color: rgba(20, 20, 30, 0.95);
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      z-index: 100;
+      width: 160px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      animation: fadeIn 0.2s ease;
+      
+      .estado-item {
+        padding: 0.6rem 1rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-weight: 500;
+        font-size: 0.9rem;
+        
+        &:hover {
+          filter: brightness(1.2);
+        }
+      }
+    }
+  }
+  
+  // Estilos para las disciplinas en formato grid
+  .disciplinas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 0.8rem;
+  }
+  
+  .terapeuta-cell {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background-color: rgba(20, 20, 30, 0.4);
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    
+    &.empty {
+      min-height: 100px;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .terapeuta-discipline {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+      margin-bottom: 0.2rem;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+      padding: 0.2rem 0.4rem;
+    }
+    
+    .asignar-terapeuta, .add-more-terapeuta {
+      cursor: pointer;
+      color: rgba(56, 218, 255, 0.8);
+      padding: 0.4rem 0.6rem;
+      border-radius: 4px;
+      border: 1px dashed rgba(56, 218, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        color: rgba(56, 218, 255, 1);
+        background-color: rgba(56, 218, 255, 0.1);
+        border-color: rgba(56, 218, 255, 0.5);
+      }
+      
+      i {
+        font-size: 0.8rem;
+      }
+    }
+    
+    .add-more-terapeuta {
+      padding: 0.3rem;
+      border: none;
+      align-self: center;
+      width: 28px;
+      height: 28px;
+      color: rgba(255, 255, 255, 0.6);
+      
+      &:hover {
+        color: white;
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+    
+    .terapeuta-asignado {
+      padding: 0.6rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      transition: all 0.2s ease;
+      border-width: 1px;
+      border-style: solid;
+      
+      // Efecto neón para las asignaciones
+      &.neon-effect {
+        position: relative;
+        
+        &:hover {
+          --glow-color: attr(border-color);
+          transform: translateY(-2px);
+          animation: glow 2s infinite;
+        }
+      }
+      
+      .terapeuta-nombre {
+        font-weight: 600;
+        margin-bottom: 0.2rem;
+        font-size: 0.9rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+      }
+      
+      .terapeuta-estado {
+        font-size: 0.75rem;
+        opacity: 0.9;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        padding: 0.1rem 0.6rem;
+        display: inline-block;
+        margin: 0 auto;
+      }
+    }
+    
+    .terapeuta-dropdown, .terapeuta-estado-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin-top: 0.5rem;
+      background-color: rgba(20, 20, 30, 0.98);
+      border-radius: 8px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      z-index: 100;
+      width: 280px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      animation: fadeIn 0.2s ease;
+      
+      &.add-more {
+        right: 0;
+        left: auto;
+      }
+      
+      .terapeuta-dropdown-header {
+        padding: 0.8rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        
+        .terapeuta-search-input {
+          width: 100%;
+          padding: 0.6rem 0.8rem;
+          background-color: rgba(0, 0, 0, 0.2);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 4px;
+          color: white;
+          font-size: 0.9rem;
+          
+          &:focus {
+            outline: none;
+            border-color: rgba(56, 218, 255, 0.5);
+            box-shadow: 0 0 0 2px rgba(56, 218, 255, 0.1);
+          }
+        }
+      }
+      
+      .terapeuta-dropdown-body {
+        max-height: 300px;
+        overflow-y: auto;
+        
+        .loading-message {
+          padding: 1rem;
+          color: rgba(255, 255, 255, 0.6);
+          text-align: center;
+          font-style: italic;
+        }
+        
+        .no-results {
+          padding: 1rem;
+          color: rgba(255, 255, 255, 0.6);
+          text-align: center;
+          font-style: italic;
+        }
+        
+        .terapeuta-list {
+          .terapeuta-list-item {
+            padding: 0.7rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            
+            &:hover {
+              background-color: rgba(56, 218, 255, 0.1);
+            }
+            
+            .terapeuta-name {
+              display: block;
+              font-weight: 500;
+              margin-bottom: 0.2rem;
+            }
+            
+            .terapeuta-info {
+              display: flex;
+              gap: 0.8rem;
+              font-size: 0.8rem;
+              color: rgba(255, 255, 255, 0.7);
+              
+              .terapeuta-area {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 120px;
+              }
+              
+              .terapeuta-lang {
+                color: #ffcc80;
+              }
+            }
+          }
+        }
+      }
+      
+      .terapeuta-dropdown-footer {
+        padding: 0.8rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        
+        .input-wrapper {
+          display: flex;
+          gap: 0.5rem;
+          
+          .terapeuta-input {
+            flex-grow: 1;
+            padding: 0.6rem 0.8rem;
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            color: white;
+            font-size: 0.9rem;
+            
+            &:focus {
+              outline: none;
+              border-color: rgba(56, 218, 255, 0.5);
+            }
+          }
+          
+          .asignar-button {
+            background-color: rgba(56, 218, 255, 0.15);
+            border: 1px solid rgba(56, 218, 255, 0.3);
+            color: rgba(56, 218, 255, 0.9);
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 0 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            
+            &:hover {
+              background-color: rgba(56, 218, 255, 0.25);
+              border-color: rgba(56, 218, 255, 0.5);
+              color: rgba(56, 218, 255, 1);
+            }
+          }
+        }
+      }
+    }
+    
+    .terapeuta-estado-dropdown {
+      width: auto;
+      min-width: 140px;
+      
+      .terapeuta-estado-item {
+        padding: 0.7rem 1rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-weight: 500;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        
+        &:hover {
+          filter: brightness(1.2);
+        }
+        
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+  
+  .acciones-column {
+    width: 70px;
+  }
+  
+  .acciones-cell {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    
+    .acciones-button {
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+      }
+    }
+    
+    .acciones-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 0.5rem;
+      background-color: rgba(20, 20, 30, 0.98);
+      border-radius: 8px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      z-index: 100;
+      width: 180px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      animation: fadeIn 0.2s ease;
+      
+      .accion-item {
+        padding: 0.8rem 1rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        &.separator {
+          height: 1px;
+          padding: 0;
+          background-color: rgba(255, 255, 255, 0.1);
+          cursor: default;
+          margin: 0.3rem 0;
+          
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+          }
+        }
+        
+        &.warning {
+          color: #ff5757;
+          
+          &:hover {
+            background-color: rgba(255, 87, 87, 0.1);
+          }
+        }
+        
+        i {
+          font-size: 1rem;
+          width: 16px;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+.actions-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+  
+  .action-button {
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    
+    &.add-button {
+      background: linear-gradient(45deg, #38daff, #5896ff);
+      color: white;
+      
+      &:hover {
+        background: linear-gradient(45deg, #5896ff, #38daff);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(56, 218, 255, 0.3);
+      }
+    }
+    
+    &.export-button {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+    }
+    
+    i {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+// Responsive styles
+@media (max-width: 1280px) {
+  .pacientes-table-container {
+    overflow-x: auto;
+    
+    .pacientes-table {
+      min-width: 1200px;
+    }
+  }
+  
+  .disciplinas-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: repeat(3, auto) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .pacientes-header {
+    .pacientes-filters {
+      flex-direction: column;
+      align-items: stretch;
+      
+      .search-box {
+        max-width: none;
+      }
+      
+      .filter-group {
+        flex-direction: column;
+      }
+    }
+  }
+}

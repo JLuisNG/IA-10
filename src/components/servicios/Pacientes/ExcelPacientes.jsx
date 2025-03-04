@@ -5,6 +5,8 @@ import logoImg from '../../../images/32A90059-EE8B-4689-A398-D08AC03A1AC6.jpeg';
 import LoadingModal from './LoadingModal';
 import EmailModal from './EmailModal';
 import DeleteConfirmModal from './DeleteConfirmModal';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const ExcelPacientes = () => {
   const navigate = useNavigate();
@@ -535,30 +537,19 @@ const ExcelPacientes = () => {
               />
               <i className="fas fa-search"></i>
             </div>
+            
             <div className="date-filter">
-  <input
-    type="date"
-    value={filterStartDate ? filterStartDate.toISOString().split('T')[0] : ''}
-    onChange={(e) => {
-      const date = e.target.value ? new Date(e.target.value) : null;
-      setFilterStartDate(date);
-    }}
-    className="date-picker"
-    placeholder="Fecha inicial"
-  />
-  <span>hasta</span>
-  <input
-    type="date"
-    value={filterEndDate ? filterEndDate.toISOString().split('T')[0] : ''}
-    onChange={(e) => {
-      const date = e.target.value ? new Date(e.target.value) : null;
-      setFilterEndDate(date);
-    }}
-    className="date-picker"
-    placeholder="Fecha final"
-  />
-  <i className="fas fa-calendar-alt"></i>
-</div>
+              <DatePicker
+                selectsRange={true}
+                startDate={filterStartDate}
+                endDate={filterEndDate}
+                onChange={handleDateFilterChange}
+                placeholderText="Filtrar por fecha"
+                className="date-picker"
+                dateFormat="MM/dd/yyyy"
+              />
+              <i className="fas fa-calendar-alt"></i>
+            </div>
             
             <select 
               className="filter-select"
