@@ -535,30 +535,8 @@ const ExcelPacientes = () => {
               />
               <i className="fas fa-search"></i>
             </div>
-            <div className="date-filter">
-  <input
-    type="date"
-    value={filterStartDate ? filterStartDate.toISOString().split('T')[0] : ''}
-    onChange={(e) => {
-      const date = e.target.value ? new Date(e.target.value) : null;
-      setFilterStartDate(date);
-    }}
-    className="date-picker"
-    placeholder="Fecha inicial"
-  />
-  <span>hasta</span>
-  <input
-    type="date"
-    value={filterEndDate ? filterEndDate.toISOString().split('T')[0] : ''}
-    onChange={(e) => {
-      const date = e.target.value ? new Date(e.target.value) : null;
-      setFilterEndDate(date);
-    }}
-    className="date-picker"
-    placeholder="Fecha final"
-  />
-  <i className="fas fa-calendar-alt"></i>
-</div>
+            
+
             
             <select 
               className="filter-select"
